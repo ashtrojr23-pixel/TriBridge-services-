@@ -1500,141 +1500,299 @@ footer {
     <span>Made with love in Nairobi, Kenya</span>
   </div>
 </footer>
+  <!-- ===================== WIDGET START ===================== -->
 
-<script>
-  // THEME TOGGLE
-  function toggleTheme() {
-    const html = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    html.setAttribute('data-theme', isDark ? 'light' : 'dark');
-    document.getElementById('themeToggle').checked = !isDark;
-  }
-
-  // Check system preference
-  if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    document.documentElement.setAttribute('data-theme', 'dark');
-    document.getElementById('themeToggle').checked = true;
-  }
-
-  // MOBILE MENU
-  function toggleMenu() {
-    document.getElementById('mobileMenu').classList.toggle('open');
-  }
-
-  // SCROLL REVEAL
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.08 });
-
-  document.querySelectorAll('section:not(.hero)').forEach(s => observer.observe(s));
-
-  // NAV SHADOW ON SCROLL
-  window.addEventListener('scroll', () => {
-    const nav = document.querySelector('nav');
-    nav.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.12)' : 'none';
-  });
-</script>
-  <!-- Floating Chat Widget -->
-<div id="chatWidget">
-
-  <!-- Chat Button -->
-  <div id="chatToggle">💬</div>
-
-  <!-- Chat Popup -->
-  <div id="chatBox">
-    <div id="chatHeader">
-      TriBridge Support
-      <span id="chatClose">✕</span>
-    </div>
-
-    <iframe 
-      src="https://www.tribridge-services.onrender.com"
-      frameborder="0">
-    </iframe>
-  </div>
-
-</div>
+<!-- Add this in your <head> if the Cinzel/Garamond fonts aren't already there -->
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
 
 <style>
-/* Widget container */
-#chatWidget {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  z-index: 9999;
-}
+  /* ── BUBBLE BUTTON ── */
+  #tb-bubble {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    z-index: 99998;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    pointer-events: none;
+  }
 
-/* Floating bubble */
-#chatToggle {
-  width: 60px;
-  height: 60px;
-  background: #1e293b;
-  color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  transition: 0.3s;
-}
+  #tb-tooltip {
+    background: linear-gradient(135deg, #1A0A00, #3D2B1F);
+    border: 1px solid #C9A84C;
+    color: #F0D080;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    padding: 10px 18px;
+    border-radius: 2px;
+    white-space: nowrap;
+    pointer-events: auto;
+    opacity: 0;
+    transform: translateY(8px) scale(0.95);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+    box-shadow: 0 4px 20px rgba(201,168,76,0.2);
+    position: relative;
+    cursor: pointer;
+  }
+  #tb-tooltip.show {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  #tb-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: -7px;
+    right: 22px;
+    width: 14px;
+    height: 7px;
+    background: #C9A84C;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+  }
 
-#chatToggle:hover {
-  transform: scale(1.1);
-}
+  #tb-btn {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #128C7E, #25d366);
+    border: 3px solid #C9A84C;
+    box-shadow:
+      0 0 0 3px rgba(201,168,76,0.2),
+      0 8px 30px rgba(37,211,102,0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    pointer-events: auto;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: tbFloat 3s ease-in-out infinite;
+    position: relative;
+  }
+  #tb-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 0 4px rgba(201,168,76,0.4), 0 12px 40px rgba(37,211,102,0.6);
+  }
+  #tb-btn svg {
+    width: 32px;
+    height: 32px;
+    fill: #fff;
+  }
+  #tb-btn::before {
+    content: '';
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px solid rgba(37,211,102,0.5);
+    animation: tbPulse 2.5s ease-out infinite;
+  }
 
-/* Chat popup box */
-#chatBox {
-  display: none;
-  flex-direction: column;
-  width: 350px;
-  height: 500px;
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-  position: absolute;
-  bottom: 80px;
-  right: 0;
-}
+  @keyframes tbFloat {
+    0%, 100% { transform: translateY(0); }
+    50%       { transform: translateY(-6px); }
+  }
+  @keyframes tbPulse {
+    0%   { transform: scale(1); opacity: 0.7; }
+    100% { transform: scale(1.6); opacity: 0; }
+  }
 
-/* Header */
-#chatHeader {
-  background: #1e293b;
-  color: white;
-  padding: 12px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
+  /* ── CHAT POPUP ── */
+  #tb-popup {
+    position: fixed;
+    bottom: 110px;
+    right: 32px;
+    width: 340px;
+    z-index: 99999;
+    border: 2px solid #C9A84C;
+    background: linear-gradient(160deg, #1A0A00, #0D0700);
+    box-shadow:
+      0 0 0 1px rgba(201,168,76,0.1),
+      0 20px 60px rgba(0,0,0,0.7),
+      0 0 40px rgba(201,168,76,0.08);
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+    transition: opacity 0.4s ease, transform 0.4s ease;
+    pointer-events: none;
+    font-family: 'EB Garamond', serif;
+  }
+  #tb-popup.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
 
-/* Close button */
-#chatClose {
-  cursor: pointer;
-}
+  #tb-popup-header {
+    background: linear-gradient(135deg, #128C7E, #075E54);
+    border-bottom: 2px solid #C9A84C;
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    position: relative;
+  }
+  #tb-popup-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #C9A84C, #F0D080);
+    border: 2px solid #C9A84C;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+  }
+  #tb-popup-info h4 {
+    font-family: 'Cinzel', serif;
+    color: #F0D080;
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+    margin-bottom: 2px;
+  }
+  #tb-popup-info span {
+    color: rgba(255,255,255,0.6);
+    font-size: 0.75rem;
+    font-style: italic;
+  }
+  #tb-close {
+    position: absolute;
+    top: 12px;
+    right: 14px;
+    background: none;
+    border: none;
+    color: rgba(255,255,255,0.5);
+    font-size: 1.3rem;
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+  }
+  #tb-close:hover { color: #C9A84C; }
 
-/* iframe chat */
-#chatBox iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-}
-</style>
+  #tb-chat-area {
+    padding: 20px 16px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
 
-<script>
-const toggle = document.getElementById("chatToggle");
-const box = document.getElementById("chatBox");
-const closeBtn = document.getElementById("chatClose");
+  .tb-msg {
+    max-width: 82%;
+    padding: 10px 14px;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    border-radius: 2px;
+    opacity: 0;
+    transform: translateY(6px);
+    animation: tbMsgIn 0.4s ease forwards;
+  }
+  @keyframes tbMsgIn {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .tb-msg.bot {
+    background: linear-gradient(135deg, rgba(61,43,31,0.8), rgba(26,14,5,0.9));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 3px solid #C9A84C;
+    color: #DEC89A;
+    align-self: flex-start;
+  }
+  .tb-msg.bot strong {
+    display: block;
+    font-family: 'Cinzel', serif;
+    color: #F0D080;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    margin-bottom: 4px;
+  }
+  .tb-msg.user {
+    background: linear-gradient(135deg, #128C7E, #075E54);
+    border: 1px solid rgba(37,211,102,0.3);
+    color: #fff;
+    align-self: flex-end;
+    text-align: right;
+  }
 
-toggle.onclick = () => {
-  box.style.display = "flex";
-};
+  #tb-quick-replies {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 16px 16px;
+  }
+  .tb-qr {
+    padding: 7px 14px;
+    background: rgba(201,168,76,0.08);
+    border: 1px solid rgba(201,168,76,0.4);
+    color: #F0D080;
+    font-family: 'EB Garamond', serif;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 2px;
+  }
+  .tb-qr:hover {
+    background: #C9A84C;
+    color: #1A0A00;
+    border-color: #C9A84C;
+  }
 
-closeBtn.onclick = () => {
-  box.style.display = "none";
-};
-</script>
+  #tb-popup-footer {
+    border-top: 1px solid rgba(201,168,76,0.2);
+    padding: 14px 16px;
+  }
+  #tb-wa-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 11px;
+    background: linear-gradient(135deg, #128C7E, #25d366);
+    color: #fff;
+    font-family: 'Cinzel', serif;
+    font-size: 0.75rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid #C9A84C;
+    transition: all 0.3s;
+    clip-path: polygon(8px 0%, calc(100% - 8px) 0%, 100% 50%, calc(100% - 8px) 100%, 8px 100%, 0% 50%);
+  }
+  #tb-wa-link:hover {
+    background: linear-gradient(135deg, #C9A84C, #F0D080);
+    color: #1A0A00;
+  }
+
+  .tb-typing {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, rgba(61,43,31,0.8), rgba(26,14,5,0.9));
+    border: 1px solid rgba(201,168,76,0.3);
+    border-left: 3px solid #C9A84C;
+    align-self: flex-start;
+    border-radius: 2px;
+    opacity: 0;
+    animation: tbMsgIn 0.4s ease forwards;
+  }
+  .tb-typing span {
+    width: 7px;
+    height: 7px;
+    background: #C9A84C;
+    border-radius: 50%;
+    animation: tbDot 1.4s ease-in-out infinite;
+  }
+  .tb-typing span:nth-child(2) { animation-delay: 0.2s; }
+  .tb-typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes tbDot {
+    0%, 80%, 100% { transform: scale(0.7); opacity: 0.4; }
+    40%            { transform: scale(1.1); opacity: 1; }
+  }
+
+  @media (max-width: 400px) {
+    #tb-popup { width: calc(100vw - 32px); right: 16px; }
+    #tb-bubble { right: 16px; bottom: 20px; }
+  }
+  </style>
 </body>
 </html>
