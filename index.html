@@ -1063,7 +1063,7 @@ footer {
   .hamburger { display: flex; }
   .btn-nav { display: none; }
   .form-row { grid-template-columns: 1fr; }
-}
+} 
 </style>
 </head>
 <body>
@@ -1533,6 +1533,108 @@ footer {
     const nav = document.querySelector('nav');
     nav.style.boxShadow = window.scrollY > 20 ? '0 4px 30px rgba(0,0,0,0.12)' : 'none';
   });
+</script>
+  <!-- Floating Chat Widget -->
+<div id="chatWidget">
+
+  <!-- Chat Button -->
+  <div id="chatToggle">💬</div>
+
+  <!-- Chat Popup -->
+  <div id="chatBox">
+    <div id="chatHeader">
+      TriBridge Support
+      <span id="chatClose">✕</span>
+    </div>
+
+    <iframe 
+      src="https://www.tribridge-services.onrender.com"
+      frameborder="0">
+    </iframe>
+  </div>
+
+</div>
+
+<style>
+/* Widget container */
+#chatWidget {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  z-index: 9999;
+}
+
+/* Floating bubble */
+#chatToggle {
+  width: 60px;
+  height: 60px;
+  background: #1e293b;
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 28px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+  transition: 0.3s;
+}
+
+#chatToggle:hover {
+  transform: scale(1.1);
+}
+
+/* Chat popup box */
+#chatBox {
+  display: none;
+  flex-direction: column;
+  width: 350px;
+  height: 500px;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  position: absolute;
+  bottom: 80px;
+  right: 0;
+}
+
+/* Header */
+#chatHeader {
+  background: #1e293b;
+  color: white;
+  padding: 12px;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Close button */
+#chatClose {
+  cursor: pointer;
+}
+
+/* iframe chat */
+#chatBox iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+</style>
+
+<script>
+const toggle = document.getElementById("chatToggle");
+const box = document.getElementById("chatBox");
+const closeBtn = document.getElementById("chatClose");
+
+toggle.onclick = () => {
+  box.style.display = "flex";
+};
+
+closeBtn.onclick = () => {
+  box.style.display = "none";
+};
 </script>
 </body>
 </html>
