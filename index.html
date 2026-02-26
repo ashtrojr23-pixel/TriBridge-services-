@@ -1,0 +1,1243 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>TriBridge Services | Speak It. Build It. Heal It.</title>
+<meta name="description" content="Professional counselling, web design & French translation by Ashraf Abdalla. Nairobi, Kenya. Est. 2025. LGBTQ+ affirming.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@300;400;500;600&family=Satisfy&family=Cinzel:wght@400;600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<style>
+/* ========== TRIBRIDGE BLEND PALETTE ========== */
+[data-theme="light"]{
+  --bg: #F9F5F0;        /* warm cream */
+  --bg2: #F2ECE5;       /* slightly deeper cream */
+  --bg3: #EAE2D9;       /* soft taupe */
+  --surface: #FFFFFF;
+  --surface2: #FDFAF7;
+  --text: #2E3B3B;      /* dark slate */
+  --text2: #5A6B6B;     /* medium slate */
+  --text3: #7F8F8F;     /* light slate */
+  --accent: #3A7B7B;    /* teal */
+  --accent2: #C97C5D;   /* coral */
+  --accent3: #D4A373;   /* gold */
+  --teal: #3A7B7B;      /* teal */
+  --coral: #C97C5D;     /* coral */
+  --gold: #D4A373;      /* gold */
+  --border: #E0D6CC;    /* soft border */
+  --shadow: rgba(58, 123, 123, 0.12);
+  --card-bg: #FFFFFF;
+  --nav-bg: rgba(249, 245, 240, 0.95);
+  --toggle-bg: #D4A373; /* gold */
+  --toggle-knob: #FFFFFF;
+  --hero-overlay: linear-gradient(135deg, #F9F5F0 0%, #F2ECE5 50%, #EAE2D9 100%);
+  --footer-bg: #1F2C2C; /* dark teal */
+}
+[data-theme="dark"]{
+  --bg: #1F2C2C;        /* deep teal */
+  --bg2: #2A3A3A;       /* dark teal */
+  --bg3: #324545;       /* slightly lighter */
+  --surface: #2A3A3A;
+  --surface2: #324545;
+  --text: #EDE7E0;      /* warm white */
+  --text2: #B7C9C9;     /* soft teal-white */
+  --text3: #8FA5A5;     /* muted teal */
+  --accent: #5FA3A3;    /* light teal */
+  --accent2: #E5987A;   /* light coral */
+  --accent3: #E0B892;   /* light gold */
+  --teal: #5FA3A3;
+  --coral: #E5987A;
+  --gold: #E0B892;
+  --border: #4A5A5A;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --card-bg: #2A3A3A;
+  --nav-bg: rgba(31, 44, 44, 0.97);
+  --toggle-bg: #4A5A5A;
+  --toggle-knob: #E0B892;
+  --hero-overlay: linear-gradient(135deg, #1F2C2C 0%, #2A3A3A 50%, #324545 100%);
+  --footer-bg: #1A1A1A; /* dark grey for contrast */
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--bg);
+  color:var(--text);
+  transition:background 0.4s,color 0.4s;
+  overflow-x:hidden;
+  position:relative;
+  width:100%;
+}
+body::before{
+  content:'🏳️‍🌈 🌐 🧠 🇫🇷 💻 ⚜ 👤 🖥️ 🏳️';
+  position:fixed;
+  top:10%;
+  left:5%;
+  font-size:clamp(3rem, 8vw, 5rem);
+  opacity:0.03;
+  white-space:pre;
+  line-height:1.4;
+  pointer-events:none;
+  z-index:0;
+  transform:rotate(-10deg);
+  width:100%;
+}
+body::after{
+  content:'⚜ ⚜ ⚜ 👩‍💻 👨‍💻 🏁';
+  position:fixed;
+  bottom:5%;
+  right:5%;
+  font-size:clamp(4rem, 10vw, 8rem);
+  opacity:0.02;
+  pointer-events:none;
+  z-index:0;
+}
+::-webkit-scrollbar{width:6px;}::-webkit-scrollbar-track{background:var(--bg);}::-webkit-scrollbar-thumb{background:var(--accent);border-radius:3px;}
+
+/* Container for centering content */
+.container{
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 20px;
+  width:100%;
+}
+@media (max-width: 768px){
+  .container{padding:0 15px;}
+}
+
+/* COOKIE BANNER */
+#cookie-banner{
+  position:fixed;
+  bottom:20px;
+  left:20px;
+  right:20px;
+  max-width:400px;
+  background:var(--surface);
+  border:2px solid var(--accent);
+  border-radius:20px;
+  padding:20px;
+  box-shadow:0 10px 40px var(--shadow);
+  z-index:100000;
+  display:none;
+  flex-direction:column;
+  gap:12px;
+  backdrop-filter:blur(10px);
+}
+#cookie-banner p{font-size:0.85rem;color:var(--text2);}
+#cookie-banner button{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:8px 16px;
+  border-radius:50px;
+  font-weight:600;
+  cursor:pointer;
+  transition:all 0.3s;
+  align-self:flex-end;
+}
+#cookie-banner button:hover{background:var(--accent2);transform:translateY(-2px);box-shadow:0 6px 12px var(--shadow);}
+
+/* ===== FIXED WELCOME MODAL ===== */
+#welcome-overlay{
+  position:fixed;
+  inset:0;
+  z-index:99999;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.78);
+  backdrop-filter:blur(10px);
+  padding:20px;
+}
+#welcome-box{
+  background:var(--bg);
+  border:2px solid var(--accent);
+  border-radius:28px;
+  max-width:min(480px, 90vw);
+  max-height:90vh;
+  overflow-y:auto;
+  width:100%;
+  padding:clamp(30px, 6vw, 44px) clamp(20px, 5vw, 36px);
+  text-align:center;
+  box-shadow:0 30px 80px rgba(58,123,123,0.35);
+  animation:wIn 0.65s cubic-bezier(0.34,1.56,0.64,1) both;
+}
+@keyframes wIn{
+  from{opacity:0;transform:scale(0.82) translateY(32px);}
+  to{opacity:1;transform:scale(1) translateY(0);}
+}
+.wb-brand{font-family:'Satisfy',cursive;font-size:clamp(1.8rem, 6vw, 2.2rem);color:var(--accent);margin-bottom:4px;}
+.wb-slogan{font-family:'EB Garamond',serif;font-style:italic;color:var(--accent2);font-size:clamp(0.8rem, 3vw, 1rem);margin-bottom:22px;letter-spacing:1px;}
+.wb-title{font-family:'Playfair Display',serif;font-size:clamp(1.4rem, 5vw, 1.75rem);font-weight:900;margin-bottom:14px;line-height:1.25;}
+.wb-text{color:var(--text2);font-size:clamp(0.85rem, 3vw, 0.93rem);line-height:1.8;margin-bottom:22px;}
+.wb-chips{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:20px;}
+.wb-chip{padding:6px 16px;border-radius:50px;font-size:0.78rem;font-weight:600;}
+.wbc-o{background:rgba(58,123,123,0.1);color:var(--accent);border:1px solid rgba(58,123,123,0.3);}
+.wbc-t{background:rgba(201,124,93,0.1);color:var(--accent2);border:1px solid rgba(201,124,93,0.3);}
+.wbc-p{background:rgba(212,163,115,0.1);color:var(--accent3);border:1px solid rgba(212,163,115,0.3);}
+.wb-pride{font-size:1.3rem;letter-spacing:4px;margin-bottom:6px;}
+.wb-pridetxt{font-size:0.78rem;color:var(--text3);margin-bottom:22px;}
+#wb-btn{
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  padding:13px 40px;
+  border-radius:50px;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.95rem;
+  font-weight:700;
+  cursor:pointer;
+  transition:all 0.3s;
+}
+#wb-btn:hover{background:var(--accent2);transform:translateY(-2px) scale(1.02);box-shadow:0 10px 30px rgba(58,123,123,0.4);}
+
+/* DID YOU KNOW BAR */
+#dyk{
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  color:#fff;
+  padding:9px 5%;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  overflow:hidden;
+  position:sticky;
+  top:70px;
+  z-index:990;
+}
+.dyk-lbl{
+  white-space:nowrap;
+  font-size:0.74rem;
+  font-weight:700;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  background:rgba(0,0,0,0.18);
+  padding:3px 12px;
+  border-radius:50px;
+  flex-shrink:0;
+}
+.dyk-track{flex:1;overflow:hidden;position:relative;height:22px;}
+#dyk-txt{
+  position:absolute;
+  white-space:nowrap;
+  font-size:0.84rem;
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  letter-spacing:0.3px;
+  animation:dykScroll 30s linear infinite;
+}
+@keyframes dykScroll{0%{transform:translateX(100vw);}100%{transform:translateX(-200%);}}
+#dyk:hover #dyk-txt{animation-play-state:paused;}
+
+/* NAV */
+nav{
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  z-index:1000;
+  background:var(--nav-bg);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--border);
+  padding:0 5%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  height:70px;
+  transition:background 0.4s;
+}
+.logo-btn{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  text-decoration:none;
+  cursor:pointer;
+  transition:transform 0.3s;
+  flex-shrink:0;
+}
+.logo-btn:hover{transform:scale(1.05) rotate(-1deg);}
+.logo-svg{
+  width:48px;
+  height:48px;
+  flex-shrink:0;
+  filter:drop-shadow(0 2px 4px var(--shadow));
+}
+@media (max-width: 600px){
+  .logo-svg{width:40px;height:40px;}
+  .logo-text{font-size:1.2rem;}
+  .logo-tagline{font-size:0.5rem;}
+  .logo-slogan{font-size:0.5rem;}
+}
+.logo-text{font-family:'Satisfy',cursive;font-size:1.5rem;color:var(--accent);line-height:1;}
+.logo-tagline{font-size:0.6rem;color:var(--text3);letter-spacing:2px;text-transform:uppercase;font-weight:500;}
+.logo-slogan{font-size:0.58rem;color:var(--accent2);letter-spacing:1.5px;font-style:italic;font-family:'EB Garamond',serif;margin-top:1px;}
+.nav-links{
+  display:flex;
+  align-items:center;
+  gap:24px;
+  list-style:none;
+}
+.nav-links li{position:relative;}
+.nav-links a{
+  text-decoration:none;
+  color:var(--text2);
+  font-size:0.83rem;
+  font-weight:500;
+  letter-spacing:0.5px;
+  transition:color 0.3s;
+  padding:5px 0;
+}
+.nav-links a::after{
+  content:'';
+  position:absolute;
+  bottom:0;
+  left:0;
+  width:0;
+  height:2px;
+  background:var(--accent);
+  transition:width 0.3s ease;
+}
+.nav-links a:hover::after{width:100%;}
+.nav-links a:hover{color:var(--accent);}
+.nav-right{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  flex-shrink:0;
+}
+.lang-switcher{
+  display:flex;
+  gap:5px;
+  margin-right:5px;
+}
+.lang-switcher button{
+  background:none;
+  border:none;
+  cursor:pointer;
+  font-size:1.2rem;
+  transition:transform 0.2s;
+  padding:2px;
+  line-height:1;
+}
+.lang-switcher button:hover{transform:scale(1.2);}
+.lang-switcher button.active{opacity:1;transform:scale(1.1);border-bottom:2px solid var(--accent);}
+.toggle{
+  position:relative;
+  width:52px;
+  height:28px;
+  cursor:pointer;
+  flex-shrink:0;
+}
+.toggle input{opacity:0;width:0;height:0;}
+.toggle-track{
+  position:absolute;
+  inset:0;
+  background:var(--toggle-bg);
+  border-radius:14px;
+  transition:background 0.4s;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 6px;
+  font-size:0.7rem;
+}
+.toggle-knob{
+  position:absolute;
+  top:3px;
+  left:3px;
+  width:22px;
+  height:22px;
+  background:var(--toggle-knob);
+  border-radius:50%;
+  transition:transform 0.4s;
+  box-shadow:0 2px 6px rgba(0,0,0,0.25);
+}
+.toggle input:checked~.toggle-knob{transform:translateX(24px);}
+.btn-nav{
+  background:var(--accent);
+  color:#fff;
+  font-family:'DM Sans',sans-serif;
+  font-size:0.82rem;
+  font-weight:600;
+  padding:9px 16px;
+  border-radius:50px;
+  text-decoration:none;
+  transition:all 0.3s;
+  border:none;
+  cursor:pointer;
+  white-space:nowrap;
+}
+.btn-nav:hover{background:var(--accent2);transform:translateY(-2px) scale(1.05);box-shadow:0 6px 20px var(--shadow);}
+.hamburger{
+  display:none;
+  flex-direction:column;
+  gap:5px;
+  cursor:pointer;
+  background:none;
+  border:none;
+  margin-left:5px;
+}
+.hamburger span{
+  display:block;
+  width:24px;
+  height:2px;
+  background:var(--text);
+  border-radius:2px;
+  transition:all 0.3s;
+}
+
+/* AD SLOTS */
+.ad-slot{
+  background:var(--surface);
+  border:1.5px dashed rgba(58,123,123,0.25);
+  border-radius:10px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  color:var(--text3);
+  font-size:0.75rem;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  font-weight:600;
+  overflow:hidden;
+  transition:all 0.3s;
+  padding:10px;
+}
+.ad-slot:hover{background:var(--bg2);border-color:var(--accent);}
+.ad-top{width:100%;min-height:90px;border-radius:0;border-left:none;border-right:none;border-top:none;}
+.ad-inline{width:100%;min-height:110px;margin:36px 0 0;}
+
+/* HERO */
+.hero{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  background:var(--hero-overlay);
+  padding:100px 0 60px;
+  position:relative;
+  overflow:hidden;
+}
+.hero::before{
+  content:'⚜';
+  position:absolute;
+  font-size:clamp(10rem, 30vw, 20rem);
+  color:var(--accent3);
+  opacity:0.03;
+  bottom:-50px;
+  left:-30px;
+  transform:rotate(15deg);
+  pointer-events:none;
+}
+.hero::after{
+  content:'🌐 🧠 🇫🇷 💻 👤 🏳️';
+  position:absolute;
+  font-size:clamp(3rem, 10vw, 6rem);
+  color:var(--accent2);
+  opacity:0.03;
+  top:20px;
+  right:20px;
+  transform:rotate(5deg);
+  pointer-events:none;
+  line-height:1.2;
+}
+.hero .container{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  position:relative;
+  z-index:2;
+}
+.hero-content{max-width:620px;}
+.hero-badge{
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:rgba(58,123,123,0.1);
+  border:1px solid rgba(58,123,123,0.3);
+  color:var(--accent);
+  padding:6px 16px;
+  border-radius:50px;
+  font-size:0.78rem;
+  font-weight:600;
+  letter-spacing:1px;
+  text-transform:uppercase;
+  margin-bottom:24px;
+  animation:slideDown 0.8s ease both;
+}
+.hero-badge::before{content:'✦';font-size:0.7rem;}
+.hero h1{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(2.2rem, 8vw, 4.5rem);
+  line-height:1.1;
+  font-weight:900;
+  margin-bottom:20px;
+  animation:slideUp 0.9s ease 0.1s both;
+}
+.hero h1 em{font-style:italic;color:var(--accent);}
+.hero-slogan{
+  font-family:'EB Garamond',serif;
+  font-style:italic;
+  font-size:clamp(0.9rem, 3.5vw, 1.15rem);
+  color:var(--accent2);
+  letter-spacing:1px;
+  margin-bottom:14px;
+  animation:slideUp 0.9s ease 0.15s both;
+}
+.hero p{
+  font-size:clamp(0.9rem, 3vw, 1.05rem);
+  color:var(--text2);
+  line-height:1.8;
+  margin-bottom:36px;
+  font-weight:300;
+  animation:slideUp 0.9s ease 0.2s both;
+}
+.hero-btns{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+  animation:slideUp 0.9s ease 0.3s both;
+}
+.btn-primary{
+  background:var(--accent);
+  color:#fff;
+  padding:14px 24px;
+  border-radius:50px;
+  font-weight:600;
+  font-size:0.95rem;
+  text-decoration:none;
+  transition:all 0.3s;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  box-shadow:0 8px 30px rgba(58,123,123,0.3);
+}
+.btn-primary:hover{transform:translateY(-3px) scale(1.02);box-shadow:0 14px 40px rgba(58,123,123,0.45);background:var(--accent2);}
+.btn-secondary{
+  background:transparent;
+  color:var(--text);
+  padding:14px 24px;
+  border-radius:50px;
+  font-weight:600;
+  font-size:0.95rem;
+  text-decoration:none;
+  transition:all 0.3s;
+  border:2px solid var(--border);
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.btn-secondary:hover{border-color:var(--accent);color:var(--accent);background:rgba(58,123,123,0.06);transform:translateY(-2px);}
+.hero-visual{
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+}
+.floating-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:18px 22px;
+  display:flex;
+  align-items:center;
+  gap:16px;
+  box-shadow:0 10px 40px var(--shadow);
+  min-width:240px;
+  transition:all 0.3s;
+}
+.floating-card:hover{transform:scale(1.05) !important;border-color:var(--accent);box-shadow:0 20px 50px var(--shadow);}
+.floating-card.c1{transform:rotate(-3deg);animation:b1 5s ease-in-out infinite;}
+.floating-card.c2{transform:rotate(2deg);animation:b2 6s ease-in-out infinite;margin-left:20px;}
+.floating-card.c3{transform:rotate(-1deg);animation:b3 7s ease-in-out infinite;}
+@keyframes b1{0%,100%{transform:rotate(-3deg) translateY(0);}50%{transform:rotate(-3deg) translateY(-8px);}}
+@keyframes b2{0%,100%{transform:rotate(2deg) translateY(0);}50%{transform:rotate(2deg) translateY(-12px);}}
+@keyframes b3{0%,100%{transform:rotate(-1deg) translateY(0);}50%{transform:rotate(-1deg) translateY(-6px);}}
+.fc-icon{
+  width:44px;
+  height:44px;
+  border-radius:12px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.4rem;
+  flex-shrink:0;
+}
+.fc-icon.orange{background:rgba(201,124,93,0.15);}
+.fc-icon.teal{background:rgba(58,123,123,0.15);}
+.fc-icon.gold{background:rgba(212,163,115,0.2);}
+.fc-text strong{display:block;font-size:0.9rem;font-weight:600;color:var(--text);}
+.fc-text span{font-size:0.75rem;color:var(--text3);}
+@keyframes slideDown{from{opacity:0;transform:translateY(-20px);}to{opacity:1;transform:translateY(0);}}
+@keyframes slideUp{from{opacity:0;transform:translateY(30px);}to{opacity:1;transform:translateY(0);}}
+
+/* STATS */
+.stats-bar{
+  background:var(--accent);
+  padding:28px 0;
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.stats-bar .container{
+  display:flex;
+  justify-content:space-around;
+  flex-wrap:wrap;
+  gap:20px;
+}
+.stat-item{text-align:center;color:#fff;transition:transform 0.3s;}
+.stat-item:hover{transform:translateY(-5px);}
+.stat-item .num{font-family:'Playfair Display',serif;font-size:clamp(1.5rem, 5vw, 2rem);font-weight:700;display:block;}
+.stat-item .lbl{font-size:clamp(0.7rem, 2.5vw, 0.78rem);opacity:0.85;letter-spacing:1px;text-transform:uppercase;}
+
+/* SECTIONS */
+section{
+  padding:clamp(50px, 8vw, 90px) 0;
+  opacity:0;
+  transform:translateY(30px);
+  transition:opacity 0.8s ease,transform 0.8s ease;
+  position:relative;
+  width:100%;
+}
+section.visible{opacity:1;transform:translateY(0);}
+section::before{
+  content:'👤 🖥️ 🏳️';
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  font-size:clamp(3rem, 10vw, 4rem);
+  opacity:0.03;
+  pointer-events:none;
+  z-index:0;
+  white-space:pre;
+}
+.section-label{
+  display:inline-block;
+  color:var(--accent);
+  font-size:0.75rem;
+  font-weight:700;
+  letter-spacing:3px;
+  text-transform:uppercase;
+  margin-bottom:12px;
+  position:relative;
+}
+.section-label::before{
+  content:'';
+  display:inline-block;
+  width:20px;
+  height:2px;
+  background:var(--accent);
+  vertical-align:middle;
+  margin-right:8px;
+}
+.section-title{
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.8rem, 6vw, 3rem);
+  font-weight:700;
+  line-height:1.2;
+  margin-bottom:16px;
+}
+.section-sub{
+  color:var(--text2);
+  font-size:clamp(0.9rem, 3vw, 1.05rem);
+  line-height:1.8;
+  max-width:560px;
+  font-weight:300;
+}
+
+/* SERVICES */
+#services{background:var(--bg2);position:relative;}
+#services::before{
+  content:'💻 👩‍💻 👨‍💻 🏳️';
+  font-size:clamp(4rem, 12vw, 6rem);
+  opacity:0.03;
+  position:absolute;
+  top:20px;
+  left:20px;
+  pointer-events:none;
+  transform:rotate(-5deg);
+}
+.services-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:28px;margin-top:52px;}
+.service-card{
+  background:var(--card-bg);
+  border:1px solid var(--border);
+  border-radius:24px;
+  padding:clamp(24px, 5vw, 36px) clamp(20px, 4vw, 32px);
+  transition:all 0.4s cubic-bezier(0.34,1.56,0.64,1);
+  position:relative;
+  overflow:hidden;
+}
+.service-card::before{
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  height:4px;
+  background:var(--sg);
+  border-radius:24px 24px 0 0;
+  transition:height 0.4s;
+}
+.service-card:hover::before{height:8px;}
+.service-card.counsel::after{
+  content:'👤';
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  font-size:clamp(3rem, 8vw, 5rem);
+  opacity:0.03;
+  pointer-events:none;
+  transform:rotate(5deg);
+}
+.service-card.web::after{
+  content:'💻';
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  font-size:clamp(3rem, 8vw, 5rem);
+  opacity:0.03;
+  pointer-events:none;
+  transform:rotate(-5deg);
+}
+.service-card.french::after{
+  content:'🏳️';
+  position:absolute;
+  bottom:10px;
+  right:10px;
+  font-size:clamp(3rem, 8vw, 5rem);
+  opacity:0.03;
+  pointer-events:none;
+  transform:rotate(10deg);
+}
+.service-card.web{--sg:linear-gradient(90deg,var(--teal),var(--gold));}
+.service-card.french{--sg:linear-gradient(90deg,var(--gold),var(--coral));}
+.service-card.counsel{--sg:linear-gradient(90deg,var(--coral),var(--teal));}
+.service-card:hover{transform:translateY(-16px) scale(1.02);box-shadow:0 40px 80px var(--shadow),0 0 0 3px rgba(58,123,123,0.15);border-color:transparent;}
+.service-card:hover .service-icon{transform:scale(1.2) rotate(-6deg);}
+.service-icon{
+  width:64px;
+  height:64px;
+  border-radius:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:1.8rem;
+  margin-bottom:24px;
+  transition:transform 0.5s cubic-bezier(0.34,1.56,0.64,1);
+}
+.web .service-icon{background:rgba(58,123,123,0.12);}
+.french .service-icon{background:rgba(212,163,115,0.12);}
+.counsel .service-icon{background:rgba(201,124,93,0.12);}
+.service-card h3{font-family:'Playfair Display',serif;font-size:clamp(1.3rem, 4vw, 1.5rem);font-weight:700;m
+<body>
+
+<!-- COOKIE BANNER -->
+<div id="cookie-banner">
+  <p><i class="fas fa-cookie-bite"></i> <span data-i18n="cookie_text">We use cookies to enhance your experience. By continuing, you agree to our</span> <a onclick="showLegal('cookie')" style="color:var(--accent); text-decoration:underline; cursor:pointer;" data-i18n="cookie_policy">Cookie Policy</a> <span data-i18n="and">and</span> <a onclick="showLegal()" style="color:var(--accent); text-decoration:underline; cursor:pointer;" data-i18n="terms_of_service">Terms of Service</a>.</p>
+  <button onclick="acceptCookies()" data-i18n="accept_cookies">Accept & Continue</button>
+</div>
+
+<!-- WELCOME MODAL (FIXED) -->
+<div id="welcome-overlay">
+  <div id="welcome-box">
+    <div class="wb-brand" data-i18n="brand">TriBridge Services</div>
+    <div class="wb-slogan" data-i18n="slogan">Speak It. Build It. Heal It.</div>
+    <h2 class="wb-title" data-i18n="welcome_title">Welcome! 👋<br>You're in the right place.</h2>
+    <p class="wb-text" data-i18n="welcome_text">Professional counselling, stunning websites, and expert French translation — all under one roof. Honest prices, real results.</p>
+    <div class="wb-chips">
+      <span class="wb-chip wbc-p"><i class="fas fa-user"></i> <span data-i18n="counselling">Counselling</span></span>
+      <span class="wb-chip wbc-o"><i class="fas fa-laptop"></i> <span data-i18n="web_design">Web Design</span></span>
+      <span class="wb-chip wbc-t"><i class="fas fa-flag"></i> <span data-i18n="translation">Translation</span></span>
+    </div>
+    <div class="wb-pride">🏳️‍🌈 🏳️‍⚧️ 🌈</div>
+    <p class="wb-pridetxt" id="welcome-fact">✨ Did you know? ...</p>
+    <button id="wb-btn" onclick="closeWelcome()" data-i18n="enter">Enter TriBridge Services →</button>
+  </div>
+</div>
+
+<!-- LEGAL MODAL -->
+<div id="legal-modal">
+  <div class="legal-content" id="legal-content"></div>
+</div>
+
+<!-- DID YOU KNOW BAR -->
+<div id="dyk" style="position:sticky;top:70px;z-index:990;">
+  <span class="dyk-lbl"><i class="fas fa-lightbulb"></i> <span data-i18n="did_you_know">Did You Know?</span></span>
+  <div class="dyk-track"><span id="dyk-txt"></span></div>
+</div>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="close-btn" onclick="toggleMenu()">✕</button>
+  <a href="#services" onclick="toggleMenu()" data-i18n="services">Services</a>
+  <a href="#reviews" onclick="toggleMenu()" data-i18n="reviews">Reviews</a>
+  <a href="#about" onclick="toggleMenu()" data-i18n="about">About</a>
+  <a href="#askrafi" onclick="toggleMenu()" data-i18n="ask_rafi">Ask Rafi AI</a>
+  <a href="#pride" onclick="toggleMenu()" data-i18n="pride_corner">Pride Corner</a>
+  <a href="#contact" onclick="toggleMenu()" data-i18n="contact">Contact</a>
+  <a href="#contact" class="btn-primary" onclick="toggleMenu()" data-i18n="get_quote">Get a Quote →</a>
+</div>
+     <!-- NAV -->
+<nav>
+  <a href="#" class="logo-btn" title="Home">
+    <svg class="logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="2" y="34" width="44" height="5" rx="2.5" fill="var(--accent)"/>
+      <path d="M4 34 Q10 18 16 34" stroke="var(--accent)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M14 34 Q24 10 34 34" stroke="var(--accent2)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <path d="M32 34 Q38 18 44 34" stroke="var(--accent3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      <circle cx="10" cy="20" r="2" fill="var(--accent3)"/>
+      <circle cx="24" cy="11" r="2.5" fill="var(--accent3)"/>
+      <circle cx="38" cy="20" r="2" fill="var(--accent3)"/>
+      <rect x="13.5" y="28" width="2" height="6" rx="1" fill="var(--accent)"/>
+      <rect x="32.5" y="28" width="2" height="6" rx="1" fill="var(--accent)"/>
+    </svg>
+    <div>
+      <div class="logo-text">TriBridge Services</div>
+      <div class="logo-tagline" data-i18n="location">Nairobi, Kenya · Est. 2025</div>
+      <div class="logo-slogan" data-i18n="slogan_short">Speak It. Build It. Heal It.</div>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#services" data-i18n="services">Services</a></li>
+    <li><a href="#reviews" data-i18n="reviews">Reviews</a></li>
+    <li><a href="#about" data-i18n="about">About</a></li>
+    <li><a href="#askrafi" data-i18n="ask_rafi">Ask Rafi</a></li>
+    <li><a href="#pride" data-i18n="pride_corner">Pride Corner</a></li>
+    <li><a href="#contact" data-i18n="contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-switcher">
+      <button onclick="setLanguage('en')" title="English" class="active">🇬🇧</button>
+      <button onclick="setLanguage('fr')" title="Français">🇫🇷</button>
+      <button onclick="setLanguage('ar')" title="العربية">🇸🇦</button>
+      <button onclick="setLanguage('sw')" title="Kiswahili">🇰🇪</button>
+    </div>
+    <label class="toggle" title="Toggle dark mode">
+      <input type="checkbox" id="themeToggle" onchange="toggleTheme()">
+      <div class="toggle-track"><span>☀️</span><span>🌙</span></div>
+      <div class="toggle-knob"></div>
+    </label>
+    <a href="#contact" class="btn-nav" data-i18n="get_quote">Get a Quote</a>
+    <button class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+<!-- AD SLOT TOP -->
+<div style="padding-top:70px;">
+  <div class="ad-slot ad-top"><i class="fas fa-ad"></i> <span data-i18n="ad_top">Advertisement Space — Contact servicestribridge@gmail.com</span></div>
+</div>
+<!-- HERO -->
+<section class="hero" id="home" style="opacity:1;transform:none;">
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-badge"><i class="fas fa-map-marker-alt"></i> <span data-i18n="hero_badge">Nairobi, Kenya · Available Now</span></div>
+      <h1><span data-i18n="hero_title1">Where</span> <em data-i18n="hero_title2">Creativity</em><br><span data-i18n="hero_title3">Meets Expertise</span></h1>
+      <p class="hero-slogan" data-i18n="hero_slogan">Speak It. Build It. Heal It. — TriBridge Services</p>
+      <p data-i18n="hero_text">Professional counselling, web design & French translation services — all under one roof. Quality work, honest prices, real results.</p>
+      <div class="hero-btns">
+        <a href="#services" class="btn-primary"><i class="fas fa-arrow-right"></i> <span data-i18n="explore_services">Explore Services</span> →</a>
+        <a href="#contact" class="btn-secondary"><i class="fas fa-comment"></i> <span data-i18n="lets_talk">Let's Talk</span></a>
+        <a href="https://claude-owei.onrender.com" target="_blank" rel="noopener" class="btn-secondary" style="border-color:var(--coral);"><i class="fas fa-user-circle"></i> <span data-i18n="view_portfolio">View Ashraf's Portfolio</span></a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-card-stack">
+        <div class="floating-card c1"><div class="fc-icon orange"><i class="fas fa-user"></i></div><div class="fc-text"><strong data-i18n="counselling_session">Counselling Session</strong><span data-i18n="ask_rafi_pricing">Ask Rafi for pricing</span></div></div>
+        <div class="floating-card c2"><div class="fc-icon teal"><i class="fas fa-flag"></i></div><div class="fc-text"><strong data-i18n="french_translation">French Translation</strong><span data-i18n="ask_rafi_pricing">Ask Rafi for pricing</span></div></div>
+        <div class="floating-card c3"><div class="fc-icon gold"><i class="fas fa-laptop"></i></div><div class="fc-text"><strong data-i18n="web_development">Web Development</strong><span data-i18n="ask_rafi_pricing">Ask Rafi for pricing</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="container">
+    <div class="stat-item"><span class="num">3+</span><span class="lbl" data-i18n="services_offered">Services Offered</span></div>
+    <div class="stat-item"><span class="num">4.7★</span><span class="lbl" data-i18n="client_rating">Client Rating</span></div>
+    <div class="stat-item"><span class="num">3</span><span class="lbl" data-i18n="languages_spoken">Languages Spoken</span></div>
+    <div class="stat-item"><span class="num">100%</span><span class="lbl" data-i18n="satisfaction_goal">Satisfaction Goal</span></div>
+  </div>
+</div>
+<!-- SERVICES -->
+<section id="services">
+  <div class="container">
+    <div class="section-label" data-i18n="what_we_offer">What We Offer</div>
+    <h2 class="section-title"><span data-i18n="services_title1">Services Tailored</span><br><span data-i18n="services_title2">for</span> <em style="font-style:italic;color:var(--accent)" data-i18n="you">You</em></h2>
+    <p class="section-sub" data-i18n="services_sub">Whether you need professional counselling, a stunning website, or seamless French translation — we bring genuine skill and care to every project.</p>
+    <div class="services-grid">
+      <div class="service-card counsel">
+        <div class="service-icon"><i class="fas fa-user"></i></div>
+        <h3 data-i18n="counselling_title">Counselling & Support</h3>
+        <p data-i18n="counselling_desc">Empathetic, structured, and confidential peer counselling. Drawing from a certified background in counselling psychology to help you navigate life's challenges.</p>
+        <ul class="service-features">
+          <li data-i18n="counselling_feat1">Academic stress & pressure</li>
+          <li data-i18n="counselling_feat2">Personal & emotional challenges</li>
+          <li data-i18n="counselling_feat3">Goal-setting & motivation</li>
+          <li data-i18n="counselling_feat4">Peer support sessions</li>
+          <li data-i18n="counselling_feat5">Flexible online scheduling</li>
+        </ul>
+        <a href="#contact" class="btn-service"><i class="fas fa-calendar-check"></i> <span data-i18n="book_session">Book a Session</span> →</a>
+      </div>
+      <div class="service-card web">
+        <div class="service-icon"><i class="fas fa-laptop"></i></div>
+        <h3 data-i18n="web_title">Web Design & Development</h3>
+        <p data-i18n="web_desc">Beautiful, mobile-first websites that make your business look professional and attract real clients. Clean code, fast load times, designs that convert.</p>
+        <ul class="service-features">
+          <li data-i18n="web_feat1">Landing pages & portfolio sites</li>
+          <li data-i18n="web_feat2">Small business websites</li>
+          <li data-i18n="web_feat3">Mobile responsive design</li>
+          <li data-i18n="web_feat4">Contact forms & basic SEO</li>
+          <li data-i18n="web_feat5">Fast turnaround time</li>
+        </ul>
+        <a href="#contact" class="btn-service"><i class="fas fa-code"></i> <span data-i18n="request_website">Request a Website</span> →</a>
+      </div>
+      <div class="service-card french">
+        <div class="service-icon"><i class="fas fa-flag"></i></div>
+        <h3 data-i18n="french_title">French Translation</h3>
+        <p data-i18n="french_desc">Advanced-level French to English (and vice versa) translation. Accurate, natural-sounding results for documents, emails, academic work, and business content.</p>
+        <ul class="service-features">
+          <li data-i18n="french_feat1">Documents & letters</li>
+          <li data-i18n="french_feat2">Academic & school assignments</li>
+          <li data-i18n="french_feat3">Business emails & reports</li>
+          <li data-i18n="french_feat4">Proofreading & editing</li>
+          <li data-i18n="french_feat5">Quick turnaround available</li>
+        </ul>
+        <a href="#contact" class="btn-service"><i class="fas fa-language"></i> <span data-i18n="request_translation">Request Translation</span> →</a>
+      </div>
+    </div>
+    <div class="svc-portfolio">
+      <a href="https://ashrafabdalla.onrender.com" target="_blank" rel="noopener">
+        <i class="fas fa-briefcase"></i> <span data-i18n="view_portfolio_link">View Ashraf's Portfolio</span> &nbsp;<small>→ ashrafabdalla.onrender.com</small>
+      </a>
+    </div>
+    <div class="ad-slot ad-inline"><i class="fas fa-ad"></i> <span data-i18n="ad_inline">Advertisement — Place your ad here · servicestribridge@gmail.com</span></div>
+  </div>
+</section>
+<!-- REVIEWS -->
+<section id="reviews">
+  <div class="container">
+    <div class="section-label" data-i18n="client_reviews">Client Reviews</div>
+    <h2 class="section-title" data-i18n="what_people_say">What People Say</h2>
+    <div class="stars-display">
+      <span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span>
+      <span class="rating-num">4.7</span><span class="rating-count" data-i18n="avg_rating">/ 5.0 average rating</span>
+    </div>
+    <div class="reviews-grid">
+      <div class="review-card"><div class="review-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div><p data-i18n="review1">Ashraf built my business landing page in just 3 days. It looks incredibly professional and all my clients have complimented it. The price was very fair — totally worth every shilling.</p><div class="reviewer"><div class="reviewer-avatar" style="background:var(--accent);">AM</div><div class="reviewer-info"><strong>Amina Mwangi</strong><span data-i18n="review1_location">Small Business Owner, Nairobi</span></div></div></div>
+      <div class="review-card"><div class="review-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star half">★</span></div><p data-i18n="review2">I needed my French assignment translated urgently and Ashraf delivered in under 2 hours. The translation was natural and accurate — my teacher was impressed. Will use again!</p><div class="reviewer"><div class="reviewer-avatar" style="background:var(--teal);">BK</div><div class="reviewer-info"><strong>Brian Kamau</strong><span data-i18n="review2_location">University Student, Nakuru</span></div></div></div>
+      <div class="review-card"><div class="review-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div><p data-i18n="review3">The counselling sessions really helped me manage my stress during exam period. Ashraf listens without judgement and gives genuinely useful guidance. I feel so much better.</p><div class="reviewer"><div class="reviewer-avatar" style="background:var(--coral);">FO</div><div class="reviewer-info"><strong>Faith Otieno</strong><span data-i18n="review3_location">High School Student, Njoro</span></div></div></div>
+      <div class="review-card"><div class="review-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star">★</span></div><p data-i18n="review4">Good value for a 5-page website. He communicated well throughout the process and fixed my feedback quickly. The site works perfectly on my phone. Recommended for startups.</p><div class="reviewer"><div class="reviewer-avatar" style="background:var(--gold);">JN</div><div class="reviewer-info"><strong>James Ndegwa</strong><span data-i18n="review4_location">Entrepreneur, Mombasa</span></div></div></div>
+      <div class="review-card"><div class="review-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div><p data-i18n="review5">I was going through a really tough time and wasn't sure who to talk to. Ashraf was patient, calm and genuinely helpful. The online sessions were so convenient. Highly recommend.</p><div class="reviewer"><div class="reviewer-avatar" style="background:var(--accent3);">SM</div><div class="reviewer-info"><strong>Sharon Mutua</strong><span data-i18n="review5_location">College Student, Eldoret</span></div></div></div>
+      <div class="review-card"><div class="review-stars"><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span><span class="star filled">★</span></div><p data-i18n="review6">Needed 8 pages translated from French to English for a business proposal. Delivered the next morning, perfectly formatted. Saved us so much time. TriBridge is our go-to now.</p><div class="reviewer"><div class="reviewer-avatar" style="background:#8B0000;">RO</div><div class="reviewer-info"><strong>Robert Ochieng</strong><span data-i18n="review6_location">Business Consultant, Kisumu</span></div></div></div>
+    </div>
+  </div>
+</section>
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label" data-i18n="about_us">About Us</div>
+    <div class="about-grid">
+      <div class="about-img-wrap">
+        <div class="about-img">
+          <img src="IMG_20260219_141133.jpg" alt="Ashraf Abdalla"
+            onerror="this.style.display='none';this.parentNode.style.fontSize='5rem';this.parentNode.style.color='var(--accent)';this.parentNode.innerHTML='⚜';">
+        </div>
+        <div class="badges-row">
+          <div class="about-badge">
+            <strong>⚜</strong>
+            <span data-i18n="cert_counsellor">Certified<br>Counsellor</span>
+          </div>
+          <div class="about-badge">
+            <strong>⚜</strong>
+            <span data-i18n="cert_developer">Certified HTML<br>Developer</span>
+          </div>
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-label" data-i18n="person_behind">The Person Behind TriBridge Services</div>
+        <h2 class="section-title">Ashraf Abdalla</h2>
+        <p data-i18n="about_p1">CEO & Founder of TriBridge Services — an aspiring nurse and multi-skilled professional from Kenya with a passion for helping people, whether through tech, language, or listening.</p>
+        <p data-i18n="about_p2">With advanced French proficiency, a Counselling Psychology Certificate (July 2024), and hands-on HTML & web development experience, I offer a rare combination of services that bridge communication, wellbeing, and digital presence.</p>
+        <p data-i18n="about_p3">My mission is simple: deliver high-quality work at honest prices, with the kind of care and attention that makes clients feel genuinely valued. <em>Speak It. Build It. Heal It.</em></p>
+        <div class="about-tags">
+          <span class="tag"><i class="fas fa-laptop"></i> <span data-i18n="tag_web">Web Design</span></span>
+          <span class="tag teal"><i class="fas fa-flag"></i> <span data-i18n="tag_french">French (Advanced)</span></span>
+          <span class="tag coral"><i class="fas fa-heart"></i> <span data-i18n="tag_counselling">Counselling Psych</span></span>
+          <span class="tag"><i class="fas fa-language"></i> <span data-i18n="tag_languages">English & Swahili</span></span>
+          <span class="tag teal"><i class="fas fa-hospital"></i> <span data-i18n="tag_healthcare">Healthcare Aspirant</span></span>
+          <span class="tag gold"><i class="fas fa-crown"></i> <span data-i18n="tag_ceo">CEO & Founder</span></span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TEAM SECTION -->
+    <div class="team-wrap">
+      <div class="section-label" data-i18n="our_team">Our Team</div>
+      <h3 style="font-family:'Playfair Display',serif;font-size:1.6rem;margin-bottom:8px;" data-i18n="people_of_tribridge">The People of TriBridge</h3>
+      <p data-i18n="team_desc">The dedicated individuals behind every project, session, and translation. Click on a placeholder to express interest in joining!</p>
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="team-avatar"><img src="IMG_20260219_141133.jpg" alt="Ashraf" onerror="this.style.display='none';this.parentNode.innerHTML='👑';"></div>
+          <h4>Ashraf Abdalla</h4>
+          <div class="team-role" data-i18n="ceo_founder">CEO & Founder</div>
+          <div class="team-bio" data-i18n="ashraf_bio">Counselling · Web Dev · French Translation · Nairobi, Kenya</div>
+        </div>
+        <div class="team-card placeholder" onclick="joinTeam('Join Our Team')">
+          <div class="team-avatar"><i class="fas fa-user-plus"></i></div>
+          <h4 data-i18n="join_team">Join Our Team</h4>
+          <div class="team-role" data-i18n="growing">We're Growing</div>
+          <div class="team-bio" data-i18n="join_bio">Passionate about counselling, tech, or languages? Click to reach out!</div>
+        </div>
+        <div class="team-card placeholder" onclick="joinTeam('Collaborator')">
+          <div class="team-avatar"><i class="fas fa-handshake"></i></div>
+          <h4 data-i18n="collaborator">Collaborator</h4>
+          <div class="team-role" data-i18n="position_open">Position Open</div>
+          <div class="team-bio" data-i18n="collab_bio">Let's create something meaningful together. Click to inquire!</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> 
+<!-- ASK RAFI -->
+<section id="askrafi">
+  <div class="container">
+    <div class="section-label" data-i18n="ai_assistant">AI Assistant</div>
+    <div class="rafi-wrap">
+      <div class="rafi-info">
+        <h2 class="section-title"><span data-i18n="meet">Meet</span> <em style="color:var(--accent);font-style:italic">AskRafi</em></h2>
+        <p data-i18n="rafi_desc">Your free AI assistant — powered by <strong>Claude Sonnet 4.6, GPT-4, and Gemini 3</strong> (and other advanced models) behind the scenes. Ask anything about our services, get general knowledge, LGBTQ+ education, wellness tips, French help, or just have a conversation!</p>
+        <div class="rafi-bdgs">
+          <span class="rb rb-free"><i class="fas fa-check-circle"></i> <span data-i18n="free_to_use">Free to use</span></span>
+          <span class="rb rb-24"><i class="fas fa-clock"></i> <span data-i18n="always_available">Always Available</span></span>
+        </div>
+        <ul class="rafi-topics">
+          <li data-i18n="topic1">TriBridge services & pricing (prices only here)</li>
+          <li data-i18n="topic2">General knowledge & fun facts</li>
+          <li data-i18n="topic3">LGBTQ+ education & support</li>
+          <li data-i18n="topic4">Wellness & counselling guidance</li>
+          <li data-i18n="topic5">French language help</li>
+          <li data-i18n="topic6">Web & tech questions</li>
+        </ul>
+      </div>
+      <div class="rafi-box">
+        <div class="rafi-head">
+          <div class="rafi-av"><i class="fas fa-robot"></i></div>
+          <div><h4>AskRafi</h4><span data-i18n="multi_ai">Multi-AI Assistant</span></div>
+          <div class="rafi-dot"></div>
+        </div>
+        <div class="rafi-msgs" id="rafi-msgs"></div>
+        <div class="rafi-qbtns" id="rafi-qbtns">
+          <button class="rqb" onclick="rafiQ('services')"><i class="fas fa-concierge-bell"></i> <span data-i18n="our_services">Our Services</span></button>
+          <button class="rqb" onclick="rafiQ('pricing')"><i class="fas fa-tag"></i> <span data-i18n="pricing">Pricing</span></button>
+          <button class="rqb" onclick="rafiQ('lgbtq')"><i class="fas fa-rainbow"></i> <span data-i18n="lgbtq_info">LGBTQ+ Info</span></button>
+          <button class="rqb" onclick="rafiQ('fact')"><i class="fas fa-lightbulb"></i> <span data-i18n="fun_fact">Fun Fact</span></button>
+          <button class="rqb" onclick="rafiQ('counselling')"><i class="fas fa-heart"></i> <span data-i18n="need_support">Need Support?</span></button>
+          <button class="rqb" onclick="rafiQ('french')"><i class="fas fa-flag"></i> <span data-i18n="french_help">French Help</span></button>
+        </div>
+        <div class="rafi-input-row">
+          <input class="rafi-inp" id="rafi-inp" type="text" placeholder="Ask Rafi anything…" onkeydown="if(event.key==='Enter')rafiSend()" data-i18n-placeholder="ask_placeholder">
+          <button class="rafi-send-btn" onclick="rafiSend()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- PRIDE CORNER with Pride Wall -->
+<section id="pride" style="padding-top:96px;">
+  <div class="container">
+    <div class="pride-rainbow"></div>
+    <div class="section-label" style="color:var(--coral);"><i class="fas fa-rainbow"></i> <span data-i18n="pride_corner">Pride Corner</span></div>
+    <div class="pride-inner">
+      <div class="pride-info">
+        <div class="pride-flags">🏳️‍🌈 🏳️‍⚧️ 🌈</div>
+        <h2 class="section-title"><span data-i18n="you_are">You Are</span> <em style="color:var(--coral);font-style:italic" data-i18n="welcome">Welcome</em> <span data-i18n="here">Here</span></h2>
+        <p data-i18n="pride_p1">TriBridge Services is a safe, inclusive, pride-affirming space. We warmly welcome every member of the LGBTQ+ community — no judgment, no conditions, just genuine care and respect.</p>
+        <p data-i18n="pride_p2">Whether you need counselling support, a website built, or a document translated — you are fully valued and welcome here, exactly as you are.</p>
+        <div class="pride-chips">
+          <span class="pride-chip" style="color:#E40303;border-color:#E40303;"><i class="fas fa-heart" style="color:#E40303;"></i> <span data-i18n="lgbtq_affirming">LGBTQ+ Affirming</span></span>
+          <span class="pride-chip" style="color:#008026;border-color:#008026;"><i class="fas fa-check-circle" style="color:#008026;"></i> <span data-i18n="safe_space">Safe Space</span></span>
+          <span class="pride-chip" style="color:#750787;border-color:#750787;"><i class="fas fa-hand-peace" style="color:#750787;"></i> <span data-i18n="all_welcome">All are Welcome</span></span>
+          <span class="pride-chip" style="color:#004DFF;border-color:#004DFF;"><i class="fas fa-equals" style="color:#004DFF;"></i> <span data-i18n="no_discrimination">No Discrimination</span></span>
+        </div>
+        <a href="https://wa.me/254759858428?text=Hi%20TriBridge!%20I%20am%20reaching%20out%20from%20the%20Pride%20Corner." target="_blank" rel="noopener" class="btn-primary" style="display:inline-flex;background:linear-gradient(135deg,var(--coral),#E40303);">
+          <i class="fas fa-rainbow"></i> <span data-i18n="reach_out">Reach Out — We're Here</span> →
+        </a>
+      </div>
+      <div class="pride-qa-box">
+        <h3><i class="fas fa-question-circle"></i> <span data-i18n="lgbtq_qa">LGBTQ+ Q & A</span></h3>
+        <p data-i18n="qa_click">Click a question to read the answer. Ask more via WhatsApp — it's free.</p>
+        <div class="pq" onclick="togglePQ(this)"><div class="pq-q"><span data-i18n="q1">What does LGBTQ+ stand for?</span> <span class="pq-arrow">▼</span></div><div class="pq-a" data-i18n="a1">LGBTQ+ stands for Lesbian, Gay, Bisexual, Transgender, Queer (or Questioning), and + represents many other identities including Intersex, Asexual, Pansexual, Non-binary, and more.</div></div>
+        <div class="pq" onclick="togglePQ(this)"><div class="pq-q"><span data-i18n="q2">What is gender identity vs sexual orientation?</span> <span class="pq-arrow">▼</span></div><div class="pq-a" data-i18n="a2">Gender identity is your internal sense of your own gender — man, woman, non-binary, or another identity. Sexual orientation is about who you are attracted to romantically or sexually.</div></div>
+        <div class="pq" onclick="togglePQ(this)"><div class="pq-q"><span data-i18n="q3">What does it mean to be non-binary?</span> <span class="pq-arrow">▼</span></div><div class="pq-a" data-i18n="a3">Non-binary is a term for gender identities that don't fit exclusively into 'man' or 'woman.' Non-binary people may identify as both, neither, or somewhere between.</div></div>
+        <div class="pq" onclick="togglePQ(this)"><div class="pq-q"><span data-i18n="q4">Is being LGBTQ+ a choice?</span> <span class="pq-arrow">▼</span></div><div class="pq-a" data-i18n="a4">No. Sexual orientation and gender identity are not choices. Every major medical and psychological organisation affirms that being LGBTQ+ is a natural variation of human identity.</div></div>
+        <div class="pq" onclick="togglePQ(this)"><div class="pq-q"><span data-i18n="q5">How can I be a better ally?</span> <span class="pq-arrow">▼</span></div><div class="pq-a" data-i18n="a5">Listen without judgment, use correct names and pronouns, speak up against discrimination, educate yourself, and make your spaces actively welcoming.</div></div>
+        <div class="pq" onclick="togglePQ(this)"><div class="pq-q"><span data-i18n="q6">Where can I find LGBTQ+ support in Kenya?</span> <span class="pq-arrow">▼</span></div><div class="pq-a" data-i18n="a6">TriBridge Services offers confidential, LGBTQ+-affirming peer counselling. You can also reach GALCK+ (Gay and Lesbian Coalition of Kenya).</div></div>
+      </div>
+    </div>
+
+    <!-- PRIDE WALL -->
+    <div class="pride-wall">
+      <h3><i class="fas fa-users"></i> <span data-i18n="pride_wall_title">Pride Wall — Share Your Story</span></h3>
+      <p style="margin-bottom:20px; color:var(--text2);" data-i18n="pride_wall_desc">Add yourself to the wall to show visibility and connect with others. Your Instagram will be linked (if provided). By submitting, you agree to display this information publicly.</p>
+      <form id="prideForm" class="pride-form" onsubmit="return submitPrideEntry()">
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> <span data-i18n="name">Name or Pseudonym</span> *</label>
+          <input type="text" id="prideName" required placeholder="e.g., Alex">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-calendar-alt"></i> <span data-i18n="age">Age</span></label>
+          <input type="number" id="prideAge" placeholder="e.g., 24">
+        </div>
+        <div class="form-group full-width">
+          <label><i class="fab fa-instagram"></i> <span data-i18n="instagram">Instagram (optional)</span></label>
+          <input type="text" id="prideInsta" placeholder="@username or full link">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-heart"></i> <span data-i18n="orientation">Orientation / Identity</span></label>
+          <input type="text" id="prideOrientation" placeholder="e.g., Gay, Trans, Queer...">
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-thumbs-up"></i> <span data-i18n="acceptability">Acceptability status</span></label>
+          <select id="prideAccept">
+            <option value="" data-i18n="select">Select...</option>
+            <option value="Fully accepted" data-i18n="fully_accepted">Fully accepted</option>
+            <option value="Partially accepted" data-i18n="partially_accepted">Partially accepted</option>
+            <option value="Not accepted" data-i18n="not_accepted">Not accepted</option>
+            <option value="Unsure" data-i18n="unsure">Unsure</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label><i class="fas fa-family"></i> <span data-i18n="parents_know">Parents know?</span></label>
+          <select id="prideParents">
+            <option value="" data-i18n="select">Select...</option>
+            <option value="Yes" data-i18n="yes">Yes</option>
+            <option value="No" data-i18n="no">No</option>
+            <option value="Some" data-i18n="some">Some</option>
+          </select>
+        </div>
+        <div class="checkbox-group full-width">
+          <input type="checkbox" id="prideTerms" required>
+          <label for="prideTerms"><span data-i18n="pride_terms">I understand that this information will be publicly visible on this page. I agree to the</span> <a onclick="showLegal()" data-i18n="terms">Terms</a> <span data-i18n="and">and</span> <a onclick="showLegal('privacy')" data-i18n="privacy_policy">Privacy Policy</a>.</label>
+        </div>
+        <button type="submit" class="btn-submit"><i class="fas fa-plus-circle"></i> <span data-i18n="add_to_wall">Add to Pride Wall</span></button>
+      </form>
+
+      <div style="margin-top:30px;">
+        <h4><i class="fas fa-list"></i> <span data-i18n="community_wall">Community Wall</span></h4>
+        <div id="prideEntries" class="pride-entries">
+          <!-- entries will be injected via JS -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- CONTACT -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label" data-i18n="get_in_touch">Get In Touch</div>
+    <h2 class="section-title" data-i18n="lets_work_together">Let's Work Together</h2>
+    <p class="section-sub" data-i18n="contact_sub">Have a project, a question, or just want to say hi? Reach out via any channel — we typically respond within 2 hours.</p>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <h3 data-i18n="reach_us">Reach Us Directly</h3>
+        <p data-i18n="contact_info_text">Quick conversations welcome. Whether you're ready to start or just exploring — no pressure, no spam.</p>
+        <div class="contact-methods">
+          <a href="mailto:servicestribridge@gmail.com" class="contact-method">
+            <div class="cm-icon"><i class="fas fa-envelope"></i></div><div class="cm-text"><strong data-i18n="email">Email</strong><span>servicestribridge@gmail.com</span></div>
+          </a>
+          <a href="https://wa.me/254759858428?text=Hi%20TriBridge!%20I%20found%20your%20website%20and%20I%27d%20love%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="contact-method wa">
+            <div class="cm-icon"><i class="fab fa-whatsapp"></i></div><div class="cm-text"><strong data-i18n="whatsapp">WhatsApp</strong><span>+254 759 858 428</span></div>
+          </a>
+          <a href="https://instagram.com/tribridge_studios" target="_blank" rel="noopener" class="contact-method ig">
+            <div class="cm-icon"><i class="fab fa-instagram"></i></div><div class="cm-text"><strong data-i18n="instagram">Instagram</strong><span>@tribridge_studios</span></div>
+          </a>
+        </div>
+        <div class="legal-box">
+          <strong><i class="fas fa-gavel"></i> <span data-i18n="legal">Legal & Terms of Service</span></strong><br>
+          <span data-i18n="legal_text">By using TriBridge Services, you agree to our</span>
+          <a onclick="showLegal()" data-i18n="terms_conditions">Terms &amp; Conditions, Privacy Policy, Refund Policy, and Disclaimer</a>.
+          <span data-i18n="governed">All services are governed by Kenyan law.</span>
+          &nbsp;·&nbsp; <a id="downloadLegalLink" href="#"><i class="fas fa-download"></i> <span data-i18n="download_legal">Download Legal Documents</span></a>
+        </div>
+      </div>
+      <div class="contact-form">
+        <h3 data-i18n="send_message">Send a Message</h3>
+        <p data-i18n="response_time">We'll get back to you within 24 hours.</p>
+        <form onsubmit="return submitToWhatsApp()">
+          <div class="form-row">
+            <div class="form-group"><label><i class="fas fa-user"></i> <span data-i18n="full_name">Full Name</span></label><input type="text" id="name" placeholder="Your name" required data-i18n-placeholder="name_placeholder"></div>
+            <div class="form-group"><label><i class="fas fa-envelope"></i> <span data-i18n="email">Email</span></label><input type="email" id="email" placeholder="your@email.com" required data-i18n-placeholder="email_placeholder"></div>
+          </div>
+          <div class="form-row">
+            <div class="form-group"><label><i class="fas fa-phone"></i> <span data-i18n="phone">Phone</span></label><input type="tel" id="phone" placeholder="+254 ..." data-i18n-placeholder="phone_placeholder"></div>
+            <div class="form-group">
+              <label><i class="fas fa-concierge-bell"></i> <span data-i18n="service_needed">Service Needed</span></label>
+              <select id="service">
+                <option value="" data-i18n="select_service">Select a service...</option>
+                <option value="Counselling" data-i18n="counselling">🧠 Counselling</option>
+                <option value="Web Design" data-i18n="web_design">🌐 Web Design</option>
+                <option value="French Translation" data-i18n="french_translation">🇫🇷 French Translation</option>
+                <option value="Multiple" data-i18n="multiple">💼 Multiple Services</option>
+                <option value="Other" data-i18n="other">Other / Not Sure</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group"><label><i class="fas fa-comment"></i> <span data-i18n="your_message">Your Message</span></label><textarea id="message" placeholder="Tell us about your project or what you need help with…" required data-i18n-placeholder="message_placeholder"></textarea></div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="agreeTerms" required>
+            <label for="agreeTerms"><span data-i18n="agree_terms">I agree to the</span> <a onclick="showLegal()" data-i18n="terms_conditions">Terms & Conditions</a> <span data-i18n="and">and</span> <a onclick="showLegal('cookie')" data-i18n="cookie_policy">Cookie Policy</a>.</label>
+          </div>
+          <button type="submit" class="btn-submit" id="submitBtn"><i class="fas fa-paper-plane"></i> <span data-i18n="send_message">Send Message</span> ✦</button>
+        </form>
+      </div>
+    </div>
+    <div class="ad-slot ad-inline"><i class="fas fa-ad"></i> <span data-i18n="ad_inline">Advertisement — Contact servicestribridge@gmail.com to advertise here</span></div>
+  </div>
+</section>
+<!-- FOOTER -->
+<div class="pride-bar"></div>
+<footer>
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-logo logo-btn" style="cursor:default;">
+        <svg class="logo-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="2" y="34" width="44" height="5" rx="2.5" fill="var(--accent)"/>
+          <path d="M4 34 Q10 18 16 34" stroke="var(--accent)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M14 34 Q24 10 34 34" stroke="var(--accent2)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <path d="M32 34 Q38 18 44 34" stroke="var(--accent3)" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+          <circle cx="10" cy="20" r="2" fill="var(--accent3)"/><circle cx="24" cy="11" r="2.5" fill="var(--accent3)"/><circle cx="38" cy="20" r="2" fill="var(--accent3)"/>
+          <rect x="13.5" y="28" width="2" height="6" rx="1" fill="var(--accent)"/><rect x="32.5" y="28" width="2" height="6" rx="1" fill="var(--accent)"/>
+        </svg>
+        <div>
+          <div class="logo-text">TriBridge Services</div>
+          <div class="logo-tagline" data-i18n="location">Nairobi, Kenya · Est. 2025</div>
+          <div class="footer-slogan" data-i18n="slogan_short">Speak It. Build It. Heal It.</div>
+          <div class="footer-pride-note"><span>🏳️‍🌈🏳️‍⚧️</span> <span data-i18n="pride_note">Pride-affirming · All welcome</span></div>
+        </div>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="services">Services</h4>
+        <ul><li><a href="#services"><i class="fas fa-user"></i> <span data-i18n="counselling">Counselling</span></a></li><li><a href="#services"><i class="fas fa-laptop"></i> <span data-i18n="web_development">Web Development</span></a></li><li><a href="#services"><i class="fas fa-flag"></i> <span data-i18n="french_translation">French Translation</span></a></li></ul>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="connect">Connect</h4>
+        <ul><li><a href="mailto:servicestribridge@gmail.com"><i class="fas fa-envelope"></i> <span data-i18n="email">Email Us</span></a></li><li><a href="https://wa.me/254759858428" target="_blank" rel="noopener"><i class="fab fa-whatsapp"></i> <span data-i18n="whatsapp">WhatsApp</span></a></li><li><a href="https://instagram.com/tribridge_studios" target="_blank" rel="noopener"><i class="fab fa-instagram"></i> <span data-i18n="instagram">Instagram</span></a></li></ul>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="quick_links">Quick Links</h4>
+        <ul><li><a href="#about"><i class="fas fa-info-circle"></i> <span data-i18n="about">About</span></a></li><li><a href="#reviews"><i class="fas fa-star"></i> <span data-i18n="reviews">Reviews</span></a></li><li><a href="#askrafi"><i class="fas fa-robot"></i> <span data-i18n="ask_rafi">Ask Rafi</span></a></li><li><a href="#pride"><i class="fas fa-rainbow"></i> <span data-i18n="pride_corner">Pride Corner</span></a></li><li><a href="https://ashrafabdalla.onrender.com" target="_blank" rel="noopener"><i class="fas fa-briefcase"></i> <span data-i18n="portfolio">Portfolio</span></a></li></ul>
+      </div>
+      <div class="footer-links">
+        <h4 data-i18n="legal">Legal</h4>
+        <ul>
+          <li><a onclick="showLegal()"><i class="fas fa-file-contract"></i> <span data-i18n="terms_conditions">Terms & Conditions</span></a></li>
+          <li><a onclick="showLegal('privacy')"><i class="fas fa-lock"></i> <span data-i18n="privacy_policy">Privacy Policy</span></a></li>
+          <li><a onclick="showLegal('refund')"><i class="fas fa-undo"></i> <span data-i18n="refund_policy">Refund Policy</span></a></li>
+          <li><a onclick="showLegal('cookie')"><i class="fas fa-cookie"></i> <span data-i18n="cookie_policy">Cookie Policy</span></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 TriBridge Services · Ashraf Abdalla · <span data-i18n="all_rights">All rights reserved</span></span>
+      <span><span data-i18n="made_with">Made with</span> <i class="fas fa-heart" style="color:var(--coral);"></i> <span data-i18n="in_nairobi">in Nairobi, Kenya</span></span>
+    </div>
+  </div>
+</footer>
