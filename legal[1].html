@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TriBridge · Legal & Policies</title>
+  <!-- SEO -->
+  <meta name="description" content="Privacy Policy, Terms of Service, Cookie Policy of TriBridge Services – your data rights and legal information.">
+  <meta name="author" content="Ashraf Abdalla">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* Same base styles as other pages – copy the full style block from translation.html */
+    /* For brevity, we include the same comprehensive styles */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    :root {
+      --bg: #ffffff;
+      --text: #1e1e1e;
+      --primary: #E05A2F;
+      --secondary: #2A9D8F;
+      --accent: #2F4858;
+      --card-bg: #f9f9f9;
+      --border: #eaeaea;
+      --footer-bg: #111;
+      --footer-text: #ddd;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --footer-bg: #0a0a0a;
+      --footer-text: #aaa;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    body { background: var(--bg); color: var(--text); }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    .theme-toggle {
+      position: fixed; bottom: 30px; right: 30px; z-index: 99;
+      background: var(--primary); color: white; width: 50px; height: 50px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); border: none;
+      font-size: 24px; transition: transform 0.3s;
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
+
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900;
+      color: var(--text);
+    }
+    .logo span { color: var(--primary); }
+    .nav-links a {
+      margin: 0 20px; text-decoration: none; color: var(--text); font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .btn {
+      display: inline-block; background: var(--primary); color: white;
+      padding: 12px 30px; border-radius: 40px; text-decoration: none; font-weight: 600;
+      transition: 0.3s; border: none; cursor: pointer;
+    }
+
+    /* Cookie banner & chatbot same as before – we include minimal for legal */
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; width: 100%; background: var(--card-bg);
+      padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+      border-top: 2px solid var(--primary); z-index: 90; transform: translateY(100%);
+      transition: 0.4s;
+    }
+    .cookie-banner.show { transform: translateY(0); }
+    .cookie-banner .btn-small { padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 30px; cursor: pointer; }
+
+    .chatbot {
+      position: fixed; bottom: 100px; right: 30px; width: 350px; background: var(--card-bg);
+      border-radius: 30px; box-shadow: var(--shadow); z-index: 98; overflow: hidden;
+      display: none; flex-direction: column;
+    }
+    .chatbot.open { display: flex; }
+    .chat-header {
+      background: var(--primary); color: white; padding: 15px 20px; display: flex;
+      justify-content: space-between; align-items: center; cursor: pointer;
+    }
+    .chat-messages { height: 250px; overflow-y: auto; padding: 15px; background: var(--bg); }
+    .bot-msg { background: var(--secondary); color: white; padding: 10px 15px; border-radius: 20px; max-width: 80%; }
+    .user-msg { background: var(--primary); color: white; padding: 10px 15px; border-radius: 20px; max-width: 80%; margin-left: auto; }
+    .chat-input { display: flex; }
+    .chat-input input { flex: 1; padding: 15px; border: none; background: var(--bg); color: var(--text); }
+    .chat-input button { background: var(--primary); color: white; border: none; padding: 0 20px; }
+
+    .footer {
+      background: var(--footer-bg); color: var(--footer-text); padding: 60px 24px 30px;
+      border-radius: 48px 48px 0 0; margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
+    }
+    .footer h4 { color: white; margin-bottom: 20px; }
+    .footer a { color: var(--primary); text-decoration: none; }
+    .contact-row { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
+    .contact-row i { width: 24px; color: var(--primary); }
+
+    .legal-section {
+      margin: 40px 0;
+      background: var(--card-bg);
+      padding: 30px;
+      border-radius: 24px;
+      border: 1px solid var(--border);
+    }
+    .legal-section h2 {
+      color: var(--primary);
+      margin-bottom: 20px;
+      font-size: 32px;
+    }
+    .legal-section h3 {
+      margin: 25px 0 10px;
+      font-size: 22px;
+    }
+    .legal-section p, .legal-section li {
+      margin-bottom: 12px;
+      color: var(--text);
+      opacity: 0.9;
+    }
+    .legal-section ul { margin-left: 20px; }
+  </style>
+</head>
+<body>
+  <!-- Theme toggle -->
+  <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
+
+  <!-- Cookie banner (simplified, but functional) -->
+  <div class="cookie-banner" id="cookieBanner">
+    <span>🍪 We use cookies. By continuing you accept our <a href="legal.html" style="color:var(--primary);">Cookie Policy</a>.</span>
+    <button class="btn-small" id="acceptCookies">Accept</button>
+  </div>
+
+  <!-- Chatbot (optional, but we keep for consistency) -->
+  <div class="chatbot" id="chatbot">
+    <div class="chat-header" id="chatHeader">
+      <span><i class="fas fa-robot"></i> Askrafi</span>
+      <i class="fas fa-chevron-down" id="toggleChat"></i>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="bot-msg">I'm Askrafi. Ask me about our legal policies.</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type...">
+      <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <div class="theme-toggle" style="bottom:100px; background:var(--secondary);" id="chatToggleBtn"><i class="fas fa-comment"></i></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">TriBridge <span>✦</span></div>
+    <div class="nav-links">
+      <a href="index.html">Web</a>
+      <a href="counseling.html">Counseling</a>
+      <a href="translation.html">Translation</a>
+      <a href="legal.html">Legal</a>
+    </div>
+    <a href="index.html#quote" class="btn btn-small">Get quote</a>
+  </nav>
+
+  <!-- Main legal content -->
+  <div class="container" style="padding: 60px 24px;">
+    <h1 style="font-size: 48px; margin-bottom: 30px;">Legal Information</h1>
+
+    <div class="legal-section">
+      <h2>Privacy Policy</h2>
+      <p><strong>Last Updated: January 2025</strong></p>
+      <p>TriBridge Services ("we", "our", "us") respects your privacy and is committed to protecting your personal data. This privacy policy explains how we collect, use, and safeguard your information when you visit our website or use our services.</p>
+      
+      <h3>1. Information We Collect</h3>
+      <p>We may collect the following types of information:</p>
+      <ul>
+        <li><strong>Personal Information:</strong> Name, email address, phone number, and other contact details you provide through our forms.</li>
+        <li><strong>Usage Data:</strong> Information about how you interact with our website, including pages visited, time spent, and browser type.</li>
+        <li><strong>Cookies:</strong> Small data files stored on your device to enhance your browsing experience.</li>
+      </ul>
+
+      <h3>2. How We Use Your Information</h3>
+      <ul>
+        <li>To provide and maintain our services</li>
+        <li>To respond to your inquiries and quote requests</li>
+        <li>To send you service-related communications</li>
+        <li>To improve our website and services</li>
+        <li>To comply with legal obligations</li>
+      </ul>
+
+      <h3>3. Data Sharing</h3>
+      <p>We do not sell, trade, or rent your personal information to third parties. We may share your data only with service providers who assist us in operating our business, and only when necessary to provide our services to you.</p>
+
+      <h3>4. Data Security</h3>
+      <p>We implement appropriate technical and organizational measures to protect your personal data against unauthorized access, alteration, disclosure, or destruction.</p>
+
+      <h3>5. Your Rights</h3>
+      <p>You have the right to access, correct, or delete your personal information. You may also withdraw consent at any time by contacting us at servicestribridge@gmail.com.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Terms of Service</h2>
+      <p><strong>Effective Date: January 2025</strong></p>
+      
+      <h3>1. Acceptance of Terms</h3>
+      <p>By accessing and using the TriBridge Services website and services, you agree to be bound by these Terms of Service. If you do not agree to these terms, please do not use our services.</p>
+
+      <h3>2. Services Provided</h3>
+      <p>TriBridge Services offers web development, counseling psychology, and French-English translation services. All services are subject to availability and the terms agreed upon during consultation.</p>
+
+      <h3>3. Payment Terms</h3>
+      <p>Payment terms will be agreed upon before the commencement of any project or service. All prices are subject to change without prior notice. Specific pricing information is available upon request.</p>
+
+      <h3>4. Intellectual Property</h3>
+      <p>All content on this website, including text, graphics, logos, and images, is the property of TriBridge Services and is protected by intellectual property laws. Unauthorized use is strictly prohibited.</p>
+
+      <h3>5. Limitation of Liability</h3>
+      <p>TriBridge Services shall not be liable for any indirect, incidental, special, or consequential damages arising out of or in connection with the use of our services.</p>
+
+      <h3>6. Confidentiality</h3>
+      <p>All counseling sessions are strictly confidential. We adhere to professional ethics and legal requirements regarding client confidentiality. Translation projects are handled with full discretion.</p>
+
+      <h3>7. Governing Law</h3>
+      <p>These terms shall be governed by the laws of Kenya.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Cookie Policy</h2>
+      <p>Our website uses cookies to enhance your browsing experience. Cookies are small text files stored on your device.</p>
+      
+      <h3>Types of Cookies We Use</h3>
+      <ul>
+        <li><strong>Essential Cookies:</strong> Required for the website to function properly.</li>
+        <li><strong>Preference Cookies:</strong> Remember your settings and preferences (e.g., dark/light mode).</li>
+        <li><strong>Analytics Cookies:</strong> Help us understand how visitors interact with our website.</li>
+      </ul>
+      <p>By continuing to use our site, you consent to our use of cookies.</p>
+    </div>
+
+    <div class="legal-section">
+      <h2>Questions?</h2>
+      <p>If you have any questions about our legal policies, please contact us:</p>
+      <p><i class="fas fa-envelope" style="color:var(--primary);"></i> servicestribridge@gmail.com<br>
+         <i class="fas fa-phone-alt" style="color:var(--primary);"></i> +254 759 858 428<br>
+         <i class="fab fa-whatsapp" style="color:var(--primary);"></i> +254 759 858 428</p>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <h4>TriBridge Services</h4>
+        <p><em>Speak It. Build It. Heal It.</em><br>Nairobi, Kenya · Est. 2025</p>
+        <div class="contact-row"><i class="fas fa-envelope"></i> servicestribridge@gmail.com</div>
+        <div class="contact-row"><i class="fas fa-phone-alt"></i> +254 759 858 428</div>
+        <div class="contact-row"><i class="fab fa-whatsapp"></i> +254 759 858 428</div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <p><a href="index.html">Web Building</a><br>
+           <a href="counseling.html">Counseling</a><br>
+           <a href="translation.html">Translation</a><br>
+           <a href="legal.html">Legal & Privacy</a></p>
+      </div>
+      <div>
+        <h4>Connect With Us</h4>
+        <div class="contact-row"><i class="fab fa-instagram"></i> TriBridge_studios</div>
+        <div class="contact-row"><i class="fab fa-facebook"></i> TriBridge Services</div>
+        <div class="contact-row"><i class="fab fa-whatsapp"></i> +254 759 858 428</div>
+        <div class="contact-row"><i class="fas fa-envelope"></i> servicestribridge@gmail.com</div>
+      </div>
+    </div>
+    <hr>
+    <div style="text-align:center;">
+      © 2026 TriBridge Services. All rights reserved.<br>
+      Founder: <a href="https://ashrafabdalla.onrender.com" target="_blank" style="color:var(--primary);">Ashraf Abdalla</a>
+    </div>
+  </footer>
+
+  <script>
+    // Dark mode
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+    toggle.addEventListener('click', ()=>{
+      body.classList.toggle('dark');
+      toggle.innerHTML = body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); toggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+
+    // Cookie banner
+    if(!localStorage.getItem('cookiesAccepted')) {
+      document.getElementById('cookieBanner').classList.add('show');
+    }
+    document.getElementById('acceptCookies').addEventListener('click', ()=>{
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.getElementById('cookieBanner').classList.remove('show');
+    });
+
+    // Chatbot (minimal)
+    const chatBtn = document.getElementById('chatToggleBtn');
+    const chatbot = document.getElementById('chatbot');
+    chatBtn.addEventListener('click', ()=>{ chatbot.classList.toggle('open'); });
+    document.getElementById('toggleChat').addEventListener('click', ()=>{ chatbot.classList.remove('open'); });
+
+    const sendBtn = document.getElementById('sendChat');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function addMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add(sender === 'user' ? 'user-msg' : 'bot-msg');
+      msgDiv.innerText = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', ()=>{
+      const q = chatInput.value.trim();
+      if(!q) return;
+      addMessage(q, 'user');
+      chatInput.value = '';
+      setTimeout(()=>{
+        let reply = "I'm Askrafi. For legal inquiries, please email servicestribridge@gmail.com.";
+        if(q.toLowerCase().includes('privacy')) reply = "Our privacy policy explains how we handle your data. You can read it above.";
+        else if(q.toLowerCase().includes('cookie')) reply = "We use essential, preference, and analytics cookies.";
+        addMessage(reply, 'bot');
+      }, 500);
+    });
+  </script>
+</body>
+</html>

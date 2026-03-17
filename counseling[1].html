@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TriBridge · Heal It · Counseling</title>
+  <!-- SEO -->
+  <meta name="description" content="Professional counseling psychology in Nairobi – individual, couples, trauma, and more. Confidential and compassionate.">
+  <meta name="keywords" content="counseling, therapy, psychology, Nairobi, Kenya, TriBridge">
+  <meta name="author" content="Ashraf Abdalla">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz@14..32&family=Playfair+Display:wght@400;700;900&display=swap" rel="stylesheet">
+  <style>
+    /* ===== RESET & VARIABLES ===== */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      line-height: 1.6;
+      transition: background 0.3s, color 0.3s;
+    }
+    :root {
+      --bg: #ffffff;
+      --text: #1e1e1e;
+      --primary: #E05A2F;
+      --secondary: #2A9D8F;
+      --accent: #2F4858;
+      --card-bg: #f9f9f9;
+      --border: #eaeaea;
+      --footer-bg: #111;
+      --footer-text: #ddd;
+      --shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+    body.dark {
+      --bg: #121212;
+      --text: #f0f0f0;
+      --card-bg: #1e1e1e;
+      --border: #333;
+      --footer-bg: #0a0a0a;
+      --footer-text: #aaa;
+      --shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    body { background: var(--bg); color: var(--text); }
+    h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+    .container { max-width: 1280px; margin: 0 auto; padding: 0 24px; }
+
+    /* ===== DARK MODE TOGGLE ===== */
+    .theme-toggle {
+      position: fixed; bottom: 30px; right: 30px; z-index: 99;
+      background: var(--primary); color: white; width: 50px; height: 50px;
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; box-shadow: 0 5px 20px rgba(0,0,0,0.3); border: none;
+      font-size: 24px; transition: transform 0.3s;
+    }
+    .theme-toggle:hover { transform: scale(1.1); }
+
+    /* ===== NAVBAR ===== */
+    .navbar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 20px 24px; background: var(--bg); border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .logo {
+      font-family: 'Playfair Display', serif; font-size: 28px; font-weight: 900;
+      color: var(--text);
+    }
+    .logo span { color: var(--primary); }
+    .nav-links a {
+      margin: 0 20px; text-decoration: none; color: var(--text); font-weight: 500;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--primary); }
+    .btn {
+      display: inline-block; background: var(--primary); color: white;
+      padding: 12px 30px; border-radius: 40px; text-decoration: none; font-weight: 600;
+      transition: 0.3s; border: none; cursor: pointer;
+    }
+    .btn-outline {
+      background: transparent; border: 2px solid var(--primary); color: var(--primary);
+    }
+    .btn-outline:hover { background: var(--primary); color: white; }
+
+    /* ===== WELCOME MODAL (same as index) ===== */
+    .modal-overlay {
+      position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+      background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center;
+      z-index: 1000; visibility: hidden; opacity: 0; transition: 0.3s;
+    }
+    .modal-overlay.show { visibility: visible; opacity: 1; }
+    .modal-card {
+      background: var(--bg); max-width: 450px; width: 90%; padding: 40px;
+      border-radius: 30px; box-shadow: var(--shadow); text-align: center;
+    }
+    .modal-card h2 { margin-bottom: 20px; }
+    .modal-card input {
+      width: 100%; padding: 14px 20px; margin: 10px 0; border: 1px solid var(--border);
+      border-radius: 50px; background: var(--bg); color: var(--text);
+    }
+    .modal-card .btn { margin: 15px 0 10px; width: 100%; }
+    .skip-link { color: #999; text-decoration: none; display: inline-block; margin-top: 15px; }
+
+    /* ===== COOKIE BANNER ===== */
+    .cookie-banner {
+      position: fixed; bottom: 0; left: 0; width: 100%; background: var(--card-bg);
+      padding: 15px 30px; display: flex; justify-content: space-between; align-items: center;
+      border-top: 2px solid var(--primary); z-index: 90; transform: translateY(100%);
+      transition: 0.4s;
+    }
+    .cookie-banner.show { transform: translateY(0); }
+    .cookie-banner .btn-small { padding: 8px 20px; background: var(--primary); color: white; border: none; border-radius: 30px; cursor: pointer; }
+
+    /* ===== CHATBOT ASKRAFI ===== */
+    .chatbot {
+      position: fixed; bottom: 100px; right: 30px; width: 350px; background: var(--card-bg);
+      border-radius: 30px; box-shadow: var(--shadow); z-index: 98; overflow: hidden;
+      display: none; flex-direction: column;
+    }
+    .chatbot.open { display: flex; }
+    .chat-header {
+      background: var(--primary); color: white; padding: 15px 20px; display: flex;
+      justify-content: space-between; align-items: center; cursor: pointer;
+    }
+    .chat-header i { font-size: 20px; }
+    .chat-messages { height: 250px; overflow-y: auto; padding: 15px; background: var(--bg); }
+    .chat-messages .bot-msg, .chat-messages .user-msg { margin: 10px 0; }
+    .bot-msg { background: var(--secondary); color: white; padding: 10px 15px; border-radius: 20px 20px 20px 5px; max-width: 80%; }
+    .user-msg { background: var(--primary); color: white; padding: 10px 15px; border-radius: 20px 20px 5px 20px; max-width: 80%; margin-left: auto; }
+    .chat-input { display: flex; border-top: 1px solid var(--border); }
+    .chat-input input { flex: 1; padding: 15px; border: none; outline: none; background: var(--bg); color: var(--text); }
+    .chat-input button { background: var(--primary); color: white; border: none; padding: 0 20px; cursor: pointer; }
+
+    /* ===== SERVICE CARDS ===== */
+    .offer-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 40px 0;
+    }
+    .card {
+      background: var(--card-bg); border-radius: 24px; padding: 24px; border: 1px solid var(--border);
+      transition: transform 0.3s, box-shadow 0.3s; text-align: center;
+    }
+    .card:hover { transform: translateY(-10px); box-shadow: var(--shadow); }
+    .card img {
+      width: 100%; height: 200px; object-fit: cover; border-radius: 16px; margin-bottom: 16px;
+    }
+    .card h4 { font-size: 24px; margin-bottom: 8px; }
+    .card p { color: var(--text); opacity: 0.8; }
+
+    /* ===== FORMS ===== */
+    .quote-form {
+      background: var(--card-bg); border-radius: 32px; padding: 40px; margin: 40px 0;
+      border: 1px solid var(--border);
+    }
+    .form-group { margin-bottom: 20px; }
+    input, textarea {
+      width: 100%; padding: 16px 20px; border: 1px solid var(--border); border-radius: 40px;
+      background: var(--bg); color: var(--text); font-size: 16px;
+    }
+    textarea { border-radius: 24px; }
+    .checkbox-label { display: flex; align-items: center; gap: 12px; font-size: 14px; }
+    .checkbox-label input { width: auto; }
+    .whatsapp-btn {
+      background: #25D366; color: white; border: none; padding: 16px 30px; border-radius: 60px;
+      font-weight: 600; font-size: 18px; display: inline-flex; align-items: center; gap: 10px;
+      cursor: pointer; transition: 0.2s; width: 100%; justify-content: center;
+    }
+    .whatsapp-btn i { font-size: 24px; }
+    .whatsapp-btn:hover { background: #128C7E; }
+
+    /* ===== FOOTER ===== */
+    .footer {
+      background: var(--footer-bg); color: var(--footer-text); padding: 60px 24px 30px;
+      border-radius: 48px 48px 0 0; margin-top: 80px;
+    }
+    .footer-inner {
+      max-width: 1280px; margin: 0 auto; display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px;
+    }
+    .footer h4 { color: white; margin-bottom: 20px; }
+    .footer a { color: var(--primary); text-decoration: none; }
+    .contact-row { display: flex; align-items: center; gap: 12px; margin: 12px 0; }
+    .contact-row i { width: 24px; color: var(--primary); }
+
+    /* ===== HERO ===== */
+    .hero {
+      background: linear-gradient(145deg, var(--secondary) 0%, var(--accent) 100%);
+      color: white; padding: 60px 24px; border-radius: 0 0 60px 60px; text-align: center;
+    }
+    .hero h1 { font-size: 56px; }
+    @media (max-width:700px){ .navbar{flex-direction:column;gap:16px;} }
+  </style>
+</head>
+<body>
+  <!-- Theme toggle -->
+  <div class="theme-toggle" id="themeToggle"><i class="fas fa-moon"></i></div>
+
+  <!-- Welcome modal (same as index) -->
+  <div class="modal-overlay" id="welcomeModal">
+    <div class="modal-card">
+      <h2>✨ Join TriBridge</h2>
+      <p>Tell us a bit about yourself</p>
+      <input type="text" id="userName" placeholder="Your name (e.g. John Doe)">
+      <input type="email" id="userEmail" placeholder="Email (your@email.com)">
+      <button class="btn" id="submitWelcome">Continue</button>
+      <a href="#" id="skipWelcome" class="skip-link">Skip for now →</a>
+    </div>
+  </div>
+
+  <!-- Cookie banner -->
+  <div class="cookie-banner" id="cookieBanner">
+    <span>🍪 We use cookies to enhance your experience. By continuing you accept our <a href="legal.html" style="color:var(--primary);">Cookie Policy</a>.</span>
+    <button class="btn-small" id="acceptCookies">Accept</button>
+  </div>
+
+  <!-- Chatbot Askrafi -->
+  <div class="chatbot" id="chatbot">
+    <div class="chat-header" id="chatHeader">
+      <span><i class="fas fa-robot"></i> Askrafi (Gemini 1.5)</span>
+      <i class="fas fa-chevron-down" id="toggleChat"></i>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="bot-msg">Hello! I'm Askrafi, powered by Gemini 1.5. Ask me anything about our counseling services.</div>
+    </div>
+    <div class="chat-input">
+      <input type="text" id="chatInput" placeholder="Type your question...">
+      <button id="sendChat"><i class="fas fa-paper-plane"></i></button>
+    </div>
+  </div>
+  <!-- Floating chat button -->
+  <div class="theme-toggle" style="bottom:100px; background:var(--secondary);" id="chatToggleBtn"><i class="fas fa-comment"></i></div>
+
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">TriBridge <span>✦</span></div>
+    <div class="nav-links">
+      <a href="index.html">Web</a>
+      <a href="counseling.html">Counseling</a>
+      <a href="translation.html">Translation</a>
+      <a href="legal.html">Legal</a>
+    </div>
+    <a href="#quote" class="btn btn-small">Book session</a>
+  </nav>
+
+  <!-- Hero -->
+  <div class="hero">
+    <h1>Heal It.</h1>
+    <p style="font-size:24px; max-width:700px; margin:20px auto;">Your mental health matters. Confidential & compassionate care.</p>
+    <a href="#quote" class="btn btn-outline" style="background:white; color:var(--accent);">Book a Session</a>
+  </div>
+
+  <div class="container">
+    <h2 class="section-head">Our Counseling Services</h2>
+    <div class="offer-grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Individual therapy">
+        <h4>Individual Therapy</h4>
+        <p>One-on-one sessions for anxiety, depression, personal growth.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1516585427167-9f4af9627e6c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Couples counseling">
+        <h4>Couples Counseling</h4>
+        <p>Strengthen relationships through guided communication.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1584515933487-7798242938b0?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="CBT">
+        <h4>Cognitive Behavioral Therapy</h4>
+        <p>Reshape negative thought patterns effectively.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1527137342181-19aab11a8ee8?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Stress management">
+        <h4>Stress & Anxiety Management</h4>
+        <p>Practical coping strategies and mindfulness.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1469571486292-0ba58a3f068b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Trauma support">
+        <h4>Trauma & PTSD Support</h4>
+        <p>Safe, compassionate healing environment.</p>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="Life coaching">
+        <h4>Career & Life Coaching</h4>
+        <p>Navigate transitions, set goals, find direction.</p>
+      </div>
+    </div>
+
+    <!-- Counseling quote form -->
+    <div class="quote-form" id="quote">
+      <h3>Request a Session</h3>
+      <p>Fill in your details – we'll reply via WhatsApp.</p>
+      <div class="form-group"><input type="text" id="cName" placeholder="Full Name *"></div>
+      <div class="form-group"><input type="email" id="cEmail" placeholder="Email *"></div>
+      <div class="form-group"><input type="tel" id="cPhone" placeholder="Phone (optional)"></div>
+      <div class="form-group"><textarea id="cNeed" rows="3" placeholder="What support are you looking for? *"></textarea></div>
+      <div class="checkbox-label" style="margin:20px 0;">
+        <input type="checkbox" id="cConsent"> <span>I agree to the <a href="legal.html">Privacy Policy & Terms</a> and authorise TriBridge to process my data.</span>
+      </div>
+      <button class="whatsapp-btn" id="cSubmit"><i class="fab fa-whatsapp"></i> Submit via WhatsApp</button>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div>
+        <h4>TriBridge Services</h4>
+        <p><em>Speak It. Build It. Heal It.</em><br>Nairobi, Kenya · Est. 2025</p>
+        <div class="contact-row"><i class="fas fa-envelope"></i> servicestribridge@gmail.com</div>
+        <div class="contact-row"><i class="fas fa-phone-alt"></i> +254 759 858 428</div>
+        <div class="contact-row"><i class="fab fa-whatsapp"></i> +254 759 858 428</div>
+      </div>
+      <div>
+        <h4>Services</h4>
+        <p><a href="index.html">Web Building</a><br>
+           <a href="counseling.html">Counseling</a><br>
+           <a href="translation.html">Translation</a><br>
+           <a href="legal.html">Legal & Privacy</a></p>
+      </div>
+      <div>
+        <h4>Connect With Us</h4>
+        <div class="contact-row"><i class="fab fa-instagram"></i> TriBridge_studios</div>
+        <div class="contact-row"><i class="fab fa-facebook"></i> TriBridge Services</div>
+        <div class="contact-row"><i class="fab fa-whatsapp"></i> +254 759 858 428</div>
+        <div class="contact-row"><i class="fas fa-envelope"></i> servicestribridge@gmail.com</div>
+      </div>
+    </div>
+    <hr>
+    <div style="text-align:center;">
+      © 2026 TriBridge Services. All rights reserved.<br>
+      Founder: <a href="https://ashrafabdalla.onrender.com" target="_blank" style="color:var(--primary);">Ashraf Abdalla</a>
+    </div>
+  </footer>
+
+  <script>
+    // ========== GLOBAL FUNCTIONS ==========
+    // Dark mode
+    const toggle = document.getElementById('themeToggle');
+    const body = document.body;
+    toggle.addEventListener('click', ()=>{
+      body.classList.toggle('dark');
+      toggle.innerHTML = body.classList.contains('dark') ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', body.classList.contains('dark') ? 'dark' : 'light');
+    });
+    if(localStorage.getItem('theme') === 'dark') { body.classList.add('dark'); toggle.innerHTML = '<i class="fas fa-sun"></i>'; }
+
+    // Welcome modal (only if not skipped/done)
+    const modal = document.getElementById('welcomeModal');
+    if(!localStorage.getItem('welcomeSkipped') && !localStorage.getItem('welcomeDone')) {
+      modal.classList.add('show');
+    }
+    document.getElementById('submitWelcome').addEventListener('click', ()=>{
+      const name = document.getElementById('userName').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      if(name && email) {
+        window.location.href = `mailto:servicestribridge@gmail.com?subject=New%20User&body=Name:${name}%0AEmail:${email}`;
+        localStorage.setItem('welcomeDone', 'true');
+        modal.classList.remove('show');
+        const service = prompt('Where would you like to go? (web / counseling / translation)');
+        if(service === 'web') window.location.href = 'index.html';
+        else if(service === 'counseling') window.location.href = 'counseling.html';
+        else if(service === 'translation') window.location.href = 'translation.html';
+      } else alert('Please fill name and email.');
+    });
+    document.getElementById('skipWelcome').addEventListener('click', (e)=>{
+      e.preventDefault();
+      localStorage.setItem('welcomeSkipped', 'true');
+      modal.classList.remove('show');
+    });
+
+    // Cookie banner
+    if(!localStorage.getItem('cookiesAccepted')) {
+      document.getElementById('cookieBanner').classList.add('show');
+    }
+    document.getElementById('acceptCookies').addEventListener('click', ()=>{
+      localStorage.setItem('cookiesAccepted', 'true');
+      document.getElementById('cookieBanner').classList.remove('show');
+    });
+
+    // Chatbot Askrafi
+    const chatBtn = document.getElementById('chatToggleBtn');
+    const chatbot = document.getElementById('chatbot');
+    chatBtn.addEventListener('click', ()=>{ chatbot.classList.toggle('open'); });
+    document.getElementById('toggleChat').addEventListener('click', ()=>{ chatbot.classList.remove('open'); });
+
+    const sendBtn = document.getElementById('sendChat');
+    const chatInput = document.getElementById('chatInput');
+    const chatMessages = document.getElementById('chatMessages');
+
+    function addMessage(text, sender) {
+      const msgDiv = document.createElement('div');
+      msgDiv.classList.add(sender === 'user' ? 'user-msg' : 'bot-msg');
+      msgDiv.innerText = text;
+      chatMessages.appendChild(msgDiv);
+      chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    sendBtn.addEventListener('click', ()=>{
+      const q = chatInput.value.trim();
+      if(!q) return;
+      addMessage(q, 'user');
+      chatInput.value = '';
+      setTimeout(()=>{
+        let reply = "I'm Askrafi. For detailed counseling info, please contact us directly.";
+        if(q.toLowerCase().includes('price') || q.toLowerCase().includes('cost'))
+          reply = "We don't display prices online. Chat with us on WhatsApp for a custom quote.";
+        else if(q.toLowerCase().includes('individual')) reply = "Individual therapy helps with anxiety, depression, and personal growth.";
+        else if(q.toLowerCase().includes('couple')) reply = "Couples counseling improves communication and resolves conflicts.";
+        addMessage(reply, 'bot');
+      }, 500);
+    });
+
+    // Counseling form submission
+    document.getElementById('cSubmit').addEventListener('click', ()=>{
+      if(!document.getElementById('cConsent').checked) {
+        alert('You must agree to the privacy policy.');
+        return;
+      }
+      const name = document.getElementById('cName').value;
+      const email = document.getElementById('cEmail').value;
+      const phone = document.getElementById('cPhone').value;
+      const need = document.getElementById('cNeed').value;
+      const message = `Counseling request:%0AName: ${name}%0AEmail: ${email}%0APhone: ${phone}%0ANeed: ${need}`;
+      window.open(`https://wa.me/254759858428?text=${message}`, '_blank');
+    });
+  </script>
+</body>
+</html>
